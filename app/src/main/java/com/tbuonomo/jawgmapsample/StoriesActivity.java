@@ -55,7 +55,7 @@ public class StoriesActivity extends BottomNavActivity {
             //Create the navigation listener
             BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
             navigation.setSelectedItemId(R.id.navigation_stories);
-            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         }
 
     @Override public void onStart() {

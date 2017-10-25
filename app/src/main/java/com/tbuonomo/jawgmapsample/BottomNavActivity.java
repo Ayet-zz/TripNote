@@ -1,42 +1,57 @@
 package com.tbuonomo.jawgmapsample;
 
-import android.content.Context;
-import android.content.Intent;
+
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+
 
 public class BottomNavActivity extends AppCompatActivity {
 
-    protected BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    CameraFragment mCameraFragment;
+    MapFragment mMapFragment;
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_map:
-                    Intent home = new Intent(getBaseContext(), MapActivity.class);
-                    startActivity(home);
-                    overridePendingTransition(0, 0);
+                    switchToMapFragment();
                     return true;
                 case R.id.navigation_camera:
-                    Intent camera = new Intent(getBaseContext(), CameraActivity.class);
-                    startActivity(camera);
-                    overridePendingTransition(0, 0);
+                    switchToCameraFragment();
                     return true;
                 case R.id.navigation_stories:
-                    Intent story = new Intent(getBaseContext(), StoriesActivity.class);
-                    startActivity(story);
-                    overridePendingTransition(0, 0);
+                    switchToNoFragment();
                     return true;
             }
             return false;
         }
 
+
+        public void switchToCameraFragment() {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content, mCameraFragment).commit();
+        }
+        public void switchToNoFragment() {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().remove(mCameraFragment).commit();
+            manager.beginTransaction().remove(mMapFragment).commit();
+        }
+        public void switchToMapFragment() {
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.content, mMapFragment).commit();
+
+        }
     };
 
     @Override
@@ -44,7 +59,27 @@ public class BottomNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_nav);
 
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        //MAP
+        mMapFragment = new MapFragment();
+
+        //CAMERA
+        mCameraFragment = new CameraFragment();
+
+        //STORY
+
+
+
+        //DEFAULT
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.content, mMapFragment).commit();
     }
 
+
+
 }
+
+
+

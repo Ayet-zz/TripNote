@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
                     new LoginTask( usernameEdit.getText().toString(),passwordEdit.getText().toString(),(ProgressBar)findViewById(R.id.login_progress),new LoginTask.OnLoginListener() {
                         @Override
                         public void OnSuccess() {
-                            Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
                             startActivity(intent);
                         }
                         public void OnFailure(){
-                            Toast.makeText(LoginActivity.this, R.string.wrong_password, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
                         }
                     }).execute();
 
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(LoginActivity.this, "Clear Inputs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Clear Inputs", Toast.LENGTH_LONG).show();
                     usernameEdit.setText("");
                     passwordEdit.setText("");
                 }

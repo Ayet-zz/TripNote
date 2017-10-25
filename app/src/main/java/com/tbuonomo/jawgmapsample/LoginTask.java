@@ -58,7 +58,7 @@ public class LoginTask extends AsyncTask<Void, Void, Boolean> {
         }else {
            onLoginListener.OnFailure();
     }
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     public interface OnLoginListener{
