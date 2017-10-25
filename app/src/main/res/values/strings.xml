@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TripNote</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_map">Map</string>
+    <string name="title_camera">Camera</string>
+    <string name="title_stories">Stories</string>
+
+</resources>
