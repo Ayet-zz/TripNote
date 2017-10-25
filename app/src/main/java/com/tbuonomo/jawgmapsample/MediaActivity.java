@@ -26,7 +26,6 @@ public class MediaActivity extends AppCompatActivity {
             setContentView(R.layout.activity_media);
 
             RecyclerView recyclerView =(RecyclerView)findViewById(R.id.media_recycler_view) ;
-            //FloatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
 
 
             // use this setting to improve performance if you know that changes
@@ -47,7 +46,20 @@ public class MediaActivity extends AppCompatActivity {
             myDataSet.add("Aurélien");
             ItemAdapter adapter = new ItemAdapter(myDataSet);
             recyclerView.setAdapter(adapter);
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
+                    if (dy > 0 && floatingActionButton.getVisibility() == View.VISIBLE) {
+                        floatingActionButton.hide();
+                    } else if (dy < 0 && floatingActionButton.getVisibility() != View.VISIBLE) {
+                        floatingActionButton.show();
+                    }
+                }
+            });
         }
+
 
     @Override public void onStart() {
         super.onStart();
