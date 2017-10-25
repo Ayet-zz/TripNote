@@ -32,11 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BottomNavActivity" >
-
-        </activity>
-<!--        <activity android:name=".StoriesActivity" />
-        <activity android:name=".MediaActivity" />-->
+        <activity android:name=".BottomNavActivity" />
+        <activity android:name=".MediaActivity" />
 
 
     </application>

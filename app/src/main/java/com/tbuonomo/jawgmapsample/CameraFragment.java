@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
@@ -427,7 +428,6 @@ public class CameraFragment extends Fragment
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         view.findViewById(R.id.picture).setOnClickListener(this);
-        view.findViewById(R.id.info).setOnClickListener(this);
         mTextureView = (AutoFitTextureView) view.findViewById(R.id.texture);
     }
 
@@ -890,6 +890,8 @@ public class CameraFragment extends Fragment
         switch (view.getId()) {
             case R.id.picture: {
                 takePicture();
+                Intent intent = new Intent(getContext(), MediaActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.info: {

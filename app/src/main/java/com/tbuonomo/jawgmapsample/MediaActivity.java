@@ -51,12 +51,20 @@ public class MediaActivity extends AppCompatActivity {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
                     FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
-                    if (dy > 0 && floatingActionButton.getVisibility() == View.VISIBLE) {
+                    if ((dy > 0||dy<0) && floatingActionButton.getVisibility() == View.VISIBLE) {
                         floatingActionButton.hide();
-                    } else if (dy < 0 && floatingActionButton.getVisibility() != View.VISIBLE) {
+                    }
+                }
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView,newState);
+                    FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
+                    if(newState==0&& floatingActionButton.getVisibility() != View.VISIBLE)
+                    {
                         floatingActionButton.show();
                     }
                 }
+
             });
         }
 

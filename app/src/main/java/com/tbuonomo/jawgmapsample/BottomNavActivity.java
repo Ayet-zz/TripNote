@@ -15,6 +15,7 @@ public class BottomNavActivity extends AppCompatActivity {
 
     CameraFragment mCameraFragment;
     MapFragment mMapFragment;
+    StoriesFragment mStoriesFragment;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -31,7 +32,7 @@ public class BottomNavActivity extends AppCompatActivity {
                     switchToCameraFragment();
                     return true;
                 case R.id.navigation_stories:
-                    switchToNoFragment();
+                    switchToStoriesFragment();
                     return true;
             }
             return false;
@@ -42,10 +43,9 @@ public class BottomNavActivity extends AppCompatActivity {
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.content, mCameraFragment).commit();
         }
-        public void switchToNoFragment() {
+        public void switchToStoriesFragment() {
             FragmentManager manager = getSupportFragmentManager();
-            manager.beginTransaction().remove(mCameraFragment).commit();
-            manager.beginTransaction().remove(mMapFragment).commit();
+            manager.beginTransaction().replace(R.id.content,mStoriesFragment).commit();
         }
         public void switchToMapFragment() {
             FragmentManager manager = getSupportFragmentManager();
@@ -69,7 +69,7 @@ public class BottomNavActivity extends AppCompatActivity {
         mCameraFragment = new CameraFragment();
 
         //STORY
-
+        mStoriesFragment=new StoriesFragment();
 
 
         //DEFAULT
