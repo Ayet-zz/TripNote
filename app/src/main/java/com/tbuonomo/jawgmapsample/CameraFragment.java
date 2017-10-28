@@ -836,9 +836,12 @@ public class CameraFragment extends Fragment
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    showToast("Saved: " + mFile);
+//                    showToast("Saved: " + mFile);
                     Log.d(TAG, mFile.toString());
                     unlockFocus();
+
+                    Intent intent = new Intent(getActivity(), SendActivity.class);
+                    startActivity(intent);
                 }
             };
 
@@ -890,8 +893,6 @@ public class CameraFragment extends Fragment
         switch (view.getId()) {
             case R.id.picture: {
                 takePicture();
-                Intent intent = new Intent(getContext(), SendActivity.class);
-                startActivity(intent);
                 break;
             }
             case R.id.info: {
@@ -1035,11 +1036,5 @@ public class CameraFragment extends Fragment
                     .create();
         }
     }
-
-
-
-
-
-
 
 }
