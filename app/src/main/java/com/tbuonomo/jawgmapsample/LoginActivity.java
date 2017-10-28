@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(getBaseContext(), "Clear Inputs", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "Inputs cleared", Toast.LENGTH_LONG).show();
                     usernameEdit.setText("");
                     passwordEdit.setText("");
                 }
