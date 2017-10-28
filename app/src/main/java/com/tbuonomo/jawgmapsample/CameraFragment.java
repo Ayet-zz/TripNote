@@ -435,7 +435,7 @@ public class CameraFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        mFile = new File(getActivity().getExternalFilesDir(null), "currentPicture.jpg");
     }
 
     @Override
@@ -890,7 +890,7 @@ public class CameraFragment extends Fragment
         switch (view.getId()) {
             case R.id.picture: {
                 takePicture();
-                Intent intent = new Intent(getContext(), MediaActivity.class);
+                Intent intent = new Intent(getContext(), SendActivity.class);
                 startActivity(intent);
                 break;
             }
