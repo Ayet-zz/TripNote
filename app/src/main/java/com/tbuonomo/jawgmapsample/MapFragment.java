@@ -1,6 +1,7 @@
 package com.tbuonomo.jawgmapsample;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Icon;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -33,6 +35,7 @@ import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.content.Context.LOCATION_SERVICE;
+import static android.support.v4.app.ActivityCompat.startActivityForResult;
 import static com.tbuonomo.jawgmapsample.R.id.icon;
 import static com.tbuonomo.jawgmapsample.R.id.mapView;
 
@@ -76,9 +79,17 @@ public class MapFragment extends Fragment {
             }
             //add listener for the button and location
 
-            MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList);
+            final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    Intent intent = new Intent(getContext(), MediaActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            };
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, mLocationListener);
             cameraRepositioning.setOnClickListener(mLocationListener);
+
         }
 
     }

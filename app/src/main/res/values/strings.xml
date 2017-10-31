@@ -20,7 +20,6 @@
         completions."
     </string>
     <string name="submit">Submit</string>
-    <string name="reset">Reset</string>
     <string name="wrong_password">Wrong login or password</string>
 
 
@@ -40,9 +39,9 @@
     </string>
 
     <string name="description">Description</string>
-    <string name="send">Send</string>
     <string name="send_fail">Fail to send</string>
 
     <string name="current_picture">currentPicture.jpg</string>
+    <string name="reset">Reset</string>
 
 </resources>

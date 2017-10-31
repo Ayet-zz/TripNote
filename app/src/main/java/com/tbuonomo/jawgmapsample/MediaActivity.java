@@ -1,6 +1,7 @@
 package com.tbuonomo.jawgmapsample;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,7 @@ public class MediaActivity extends AppCompatActivity {
             setContentView(R.layout.activity_media);
 
             RecyclerView recyclerView =(RecyclerView)findViewById(R.id.media_recycler_view) ;
-
+            FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
 
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -37,15 +38,17 @@ public class MediaActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             // specify an adapter
-            List<String> myDataSet=new ArrayList<String>();
-            myDataSet.add("Jean");
-            myDataSet.add("Jacques");
-            myDataSet.add("Antoine");
-            myDataSet.add("Robin");
-            myDataSet.add("Ghali");
-            myDataSet.add("Aurélien");
+            List<MediaObjectRecyclerView> myDataSet=new ArrayList<MediaObjectRecyclerView>();
+            myDataSet.add(new MediaObjectRecyclerView("Amazing journey #relax #sun #photooftheday","https://www.thesun.co.uk/wp-content/uploads/2016/08/nintchdbpict000256190292.jpg?w=960"));
+            myDataSet.add(new MediaObjectRecyclerView("Britney it looks so cool! Reminds me of our awesome trip to Italy last year :)!"));
             ItemAdapter adapter = new ItemAdapter(myDataSet);
             recyclerView.setAdapter(adapter);
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -98,6 +101,8 @@ public class MediaActivity extends AppCompatActivity {
     @Override protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+
+
 
     }
 

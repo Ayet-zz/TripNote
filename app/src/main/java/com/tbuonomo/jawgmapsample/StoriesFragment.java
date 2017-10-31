@@ -41,13 +41,13 @@ public class StoriesFragment extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter
-        List<String> myDataSet=new ArrayList<String>();
-        myDataSet.add("Jean");
-        myDataSet.add("Jacques");
-        myDataSet.add("Antoine");
-        myDataSet.add("Robin");
-        myDataSet.add("Ghali");
-        myDataSet.add("Aurélien");
+        List<MediaObjectRecyclerView> myDataSet=new ArrayList<>();
+        myDataSet.add(new MediaObjectRecyclerView("Jean"));
+        myDataSet.add(new MediaObjectRecyclerView("Jacques"));
+        myDataSet.add(new MediaObjectRecyclerView("Salome"));
+        myDataSet.add(new MediaObjectRecyclerView("Robin"));
+        myDataSet.add(new MediaObjectRecyclerView("Ghali"));
+        myDataSet.add(new MediaObjectRecyclerView("Aurelien"));
         ItemAdapter adapter = new ItemAdapter(myDataSet);
         recyclerView.setAdapter(adapter);
 
