@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.File;
 
@@ -36,7 +37,11 @@ public class SendActivity extends AppCompatActivity {
 
 
         File mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
-        Glide.with(this).load(mFile).into(img);
+        Glide.with(this)
+                .load(mFile)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(img);
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
