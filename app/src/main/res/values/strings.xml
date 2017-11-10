@@ -44,4 +44,12 @@
     <string name="current_picture">currentPicture.jpg</string>
     <string name="reset">Reset</string>
 
+
+
+
+    <string name="file_created">Created file: %1$s.</string>
+    <string name="file_create_error">Error while trying to create the file.</string>
+    <string name="select_folder">Select a folder</string>
+    <string name="select_file">Select file</string>
+
 </resources>

@@ -1,6 +1,8 @@
 package com.tbuonomo.jawgmapsample;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,8 @@ public class SendActivity extends AppCompatActivity {
     private ImageView img;
     private EditText description;
 
+    private File mFile;
+
     private ProgressBar mProgressBar;
 
     @Override
@@ -36,7 +40,7 @@ public class SendActivity extends AppCompatActivity {
         mProgressBar = (ProgressBar)findViewById(R.id.send_progress);
 
 
-        File mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
+        mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
         Glide.with(this)
                 .load(mFile)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -46,17 +50,20 @@ public class SendActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SendTask(img, description.getText().toString(), mProgressBar, new SendTask.OnSendListener() {
-                    @Override
-                    public void OnSuccess() {
-                        Intent intent = new Intent(SendActivity.this, BottomNavActivity.class);
-                        startActivity(intent);
-                    }
+//                new SendTask(mFile, description.getText().toString(), mProgressBar, new SendTask.OnSendListener() {
+//                    @Override
+//                    public void OnSuccess() {
+//                        Intent intent = new Intent(SendActivity.this, BottomNavActivity.class);
+//                        startActivity(intent);
+//                    }
+//
+//                    public void OnFailure(){
+//                        Toast.makeText(getBaseContext(), R.string.send_fail, Toast.LENGTH_LONG).show();
+//                    }
+//                }).execute();
 
-                    public void OnFailure(){
-                        Toast.makeText(getBaseContext(), R.string.send_fail, Toast.LENGTH_LONG).show();
-                    }
-                }).execute();
+                Intent intent = new Intent(SendActivity.this, CreateFileActivity.class);
+                startActivity(intent);
             }
         });
 

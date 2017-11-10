@@ -32,7 +32,8 @@
         </activity>
         <activity android:name=".BottomNavActivity" />
         <activity android:name=".MediaActivity" />
-        <activity android:name=".SendActivity"/>
+        <activity android:name=".SendActivity" />
+        <activity android:name=".CreateFileActivity"/>
 
     </application>
 
