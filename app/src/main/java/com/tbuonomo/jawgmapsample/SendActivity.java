@@ -63,6 +63,7 @@ public class SendActivity extends AppCompatActivity {
 //                }).execute();
 
                 Intent intent = new Intent(SendActivity.this, CreateFileActivity.class);
+                intent.putExtra("description", description.getText().toString());
                 startActivity(intent);
             }
         });

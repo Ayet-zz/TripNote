@@ -26,6 +26,7 @@ import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.MetadataChangeSet;
+import com.google.android.gms.drive.metadata.CustomPropertyKey;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -73,10 +74,16 @@ public class CreateFileActivity extends BaseDemoActivity {
                             Log.i(TAG, "Unable to write file contents.");
                         }
 
+                        Intent intent = getIntent();
+                        String description = intent.getStringExtra("description");
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
                                 .setTitle("Android Photo.png")
+                                .setDescription(description)
+                                .setCustomProperty(new CustomPropertyKey("Latitude", CustomPropertyKey.PUBLIC), "45.781")
+                                .setCustomProperty(new CustomPropertyKey("Longitude", CustomPropertyKey.PUBLIC), "4.852")
+                                //.setCustomProperty(new CustomPropertyKey("1", CustomPropertyKey.PUBLIC), "blabla1")
                                 .build();
 
                         return getDriveResourceClient().createFile(parent, changeSet, contents);
