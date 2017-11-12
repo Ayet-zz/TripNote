@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">TripNote</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_map">Map</string>
+    <string name="title_camera">Camera</string>
+    <string name="title_stories">Stories</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="submit">Submit</string>
+    <string name="wrong_password">Wrong login or password</string>
+
+
+    <string name="description_info">Info</string>
+
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
+            you can display camera preview and take pictures.
+
+
+        ]]>
+    </string>
+
+    <string name="description">Description</string>
+    <string name="send_fail">Fail to send</string>
+
+    <string name="current_picture">currentPicture.jpg</string>
+    <string name="reset">Reset</string>
+
+
+
+
+    <string name="file_created">Created file: %1$s.</string>
+    <string name="file_create_error">Error while trying to create the file.</string>
+    <string name="select_folder">Select a folder</string>
+    <string name="select_file">Select file</string>
+    <string name="file_not_selected">file is not selected</string>
+    <string name="read_failed">read failed</string>
+
+</resources>
