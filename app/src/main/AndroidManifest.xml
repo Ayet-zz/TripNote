@@ -24,17 +24,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar.App">
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
+
         <activity android:name=".BottomNavActivity" />
         <activity android:name=".RetrieveMetadataActivity" />
         <activity android:name=".MediaActivity" />
         <activity android:name=".SendActivity" />
         <activity android:name=".CreateFileActivity"/>
+
+        <activity android:name=".StoriesActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

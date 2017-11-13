@@ -53,5 +53,6 @@
     <string name="select_file">Select file</string>
     <string name="file_not_selected">file is not selected</string>
     <string name="read_failed">read failed</string>
+    <string name="query_failed">Problem while retrieving files.</string>
 
 </resources>
