@@ -11,6 +11,7 @@ import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.MetadataBuffer;
+import com.google.android.gms.drive.metadata.CustomPropertyKey;
 import com.google.android.gms.drive.query.Query;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,7 +34,7 @@ public class ReadFile extends ConnectionDriveService {
 
     private static final String TAG = "ReadFile";
 
-    private MetadataBuffer metadataBuffer;
+    //private MetadataBuffer metadataBuffer;
     public List<StoryRecyclerView> myDataSet;
 
 
@@ -64,8 +65,8 @@ public class ReadFile extends ConnectionDriveService {
                 .addOnSuccessListener(
                         new OnSuccessListener<MetadataBuffer>() {
                             @Override
-                            public void onSuccess(MetadataBuffer metadataBufferBis) {
-                                metadataBuffer=metadataBufferBis;
+                            public void onSuccess(MetadataBuffer metadataBuffer) {
+                                //metadataBuffer=metadataBufferBis;
                                 // Handle results...
                                 // [START_EXCLUDE]
 
@@ -83,8 +84,8 @@ public class ReadFile extends ConnectionDriveService {
                                     else{
                                         description = "";
                                     }
-                                    final String latitude=item.getCustomProperties().get("latitude");
-                                    final String longitude=item.getCustomProperties().get("latitude");
+                                    final String latitude=item.getCustomProperties().get(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC));
+                                    final String longitude=item.getCustomProperties().get(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC));
 
                                     //get the picture
                                     DriveId mId = item.getDriveId();

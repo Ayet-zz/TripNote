@@ -19,18 +19,22 @@ public class ReadFileTask extends AsyncTask<Void, Void, Boolean> {
     private final OnTestListener onTestListener;
 
     private List<StoryRecyclerView> myDataSet;
-    private final ProgressBar progressBar;
+    //private final ProgressBar progressBar;
 
     public ReadFileTask(List<StoryRecyclerView> myDataSet, ProgressBar progressBar, OnTestListener onTestListener) {
         this.onTestListener=onTestListener;
         this.myDataSet=myDataSet;
-        this.progressBar=progressBar;
+        //this.progressBar=progressBar;
+    }
+    public ReadFileTask(List<StoryRecyclerView> myDataSet, OnTestListener onTestListener) {
+        this.onTestListener=onTestListener;
+        this.myDataSet=myDataSet;
     }
 
     @Override
     protected void onPreExecute() {
         // Show Progress bar
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -55,7 +59,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Boolean> {
         }else {
             onTestListener.OnFailure();
         }
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 
     public interface OnTestListener{

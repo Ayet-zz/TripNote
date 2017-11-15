@@ -71,46 +71,49 @@ public class MapFragment extends Fragment {
         mapView.setStyleUrl("https://tile.jawg.io/jawg-streets.json?access-token=" + BuildConfig.JAWG_API_KEY);
         mapView.onCreate(savedInstanceState);
 
-
-        new ReadFileTask( myDataSet, new ReadFileTask.OnTestListener() {
-            @Override
-            public void OnSuccess() {
-                for (StoryRecyclerView data:myDataSet) {
-                    markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
-                            .title(data.getTitle()));
-                }
-
-            }
-            public void OnFailure(){
-                //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
-            }
-        }).execute();
-
-        //Check if we have the permission and create a location manager
-        if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
-            LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
-
-             final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
+        if(myDataSet != null){
+            new ReadFileTask( myDataSet, new ReadFileTask.OnTestListener() {
                 @Override
-                public boolean onMarkerClick(@NonNull Marker marker) {
-                    if(!(marker.getTitle().equals("You are here!"))) {
-                       if(markerOptionsList.contains(marker))
-                       {
-                           Intent intent = new Intent(getContext(), MediaActivity.class);
-                           intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(marker)).getImage());
-                           intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(marker)).getTitle());
-                           intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(marker)).getDescription());
-                           startActivity(intent);
-                           return true;
-                       }
-
+                public void OnSuccess() {
+                    for (StoryRecyclerView data:myDataSet) {
+                        markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
+                                .title(data.getTitle()));
                     }
-                   return false;
-                }
-            };
-            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, mLocationListener);
-            cameraRepositioning.setOnClickListener(mLocationListener);
 
+                }
+                public void OnFailure(){
+                    //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
+                }
+            }).execute();
+
+
+
+            //Check if we have the permission and create a location manager
+            if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
+                LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
+
+                 final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        if(!(marker.getTitle().equals("You are here!"))) {
+                           if(markerOptionsList.contains(marker))
+                           {
+                               Intent intent = new Intent(getContext(), MediaActivity.class);
+                               intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(marker)).getImage());
+                               intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(marker)).getTitle());
+                               intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(marker)).getDescription());
+                               startActivity(intent);
+                               return true;
+                           }
+
+                        }
+                       return false;
+                    }
+                };
+                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, mLocationListener);
+                cameraRepositioning.setOnClickListener(mLocationListener);
+
+            }
         }
 
     }
