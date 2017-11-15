@@ -3,7 +3,6 @@ package com.tbuonomo.jawgmapsample;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.design.widget.Snackbar;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     new LoginTask( usernameEdit.getText().toString(),passwordEdit.getText().toString(),(ProgressBar)findViewById(R.id.login_progress),new LoginTask.OnLoginListener() {
                         @Override
                         public void OnSuccess() {
-                            Intent intent = new Intent(LoginActivity.this, BottomNavActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, ConnectionDriveActivity.class);
                             startActivity(intent);
                         }
                         public void OnFailure(){

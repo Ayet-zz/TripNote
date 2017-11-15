@@ -24,15 +24,6 @@ import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 public abstract class ConnectionDriveService {
     private static final String TAG = "BaseDriveActivity";
 
-    /**
-     * Request code for google sign-in
-     */
-    protected static final int REQUEST_CODE_SIGN_IN = 0;
-
-    /**
-     * Request code for the Drive picker
-     */
-    protected static final int REQUEST_CODE_OPEN_ITEM = 1;
 
     /**
      * Handles high-level drive functions like sync
@@ -43,12 +34,6 @@ public abstract class ConnectionDriveService {
      * Handle access to Drive resources/files.
      */
     private DriveResourceClient mDriveResourceClient;
-
-    /**
-     * Tracks completion of the drive picker
-     */
-    private TaskCompletionSource<DriveId> mOpenItemTaskSource;
-
 
 
     public ConnectionDriveService(){
@@ -85,76 +70,10 @@ public abstract class ConnectionDriveService {
      * user's account.
      */
     private void initializeDriveClient(GoogleSignInAccount signInAccount) {
-        mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
+//        mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
         mDriveResourceClient = Drive.getDriveResourceClient(getApplicationContext(), signInAccount);
-//        onDriveClientReady();
     }
 
-    /**
-     * Prompts the user to select a text file using OpenFileActivity.
-     *
-     * @return Task that resolves with the selected item's ID.
-     */
-//    protected Task<DriveId> pickTextFile() {
-//        OpenFileActivityOptions openOptions =
-//                new OpenFileActivityOptions.Builder()
-//                        .setSelectionFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
-//                        .setActivityTitle(getString(R.string.select_file))
-//                        .build();
-//        return pickItem(openOptions);
-//    }
-
-    /**
-     * Prompts the user to select a folder using OpenFileActivity.
-     *
-     * @return Task that resolves with the selected item's ID.
-     */
-//    protected Task<DriveId> pickFolder() {
-//        OpenFileActivityOptions openOptions =
-//                new OpenFileActivityOptions.Builder()
-//                        .setSelectionFilter(
-//                                Filters.eq(SearchableField.MIME_TYPE, DriveFolder.MIME_TYPE))
-//                        .setActivityTitle(getString(R.string.select_folder))
-//                        .build();
-//        return pickItem(openOptions);
-//    }
-
-    /**
-     * Prompts the user to select a folder using OpenFileActivity.
-     *
-     * @param openOptions Filter that should be applied to the selection
-     * @return Task that resolves with the selected item's ID.
-     */
-//    private Task<DriveId> pickItem(OpenFileActivityOptions openOptions) {
-//        mOpenItemTaskSource = new TaskCompletionSource<>();
-//        getDriveClient()
-//                .newOpenFileActivityIntentSender(openOptions)
-//                .continueWith(new Continuation<IntentSender, Void>() {
-//                    @Override
-//                    public Void then(@NonNull Task<IntentSender> task) throws Exception {
-//                        startIntentSenderForResult(
-//                                task.getResult(), REQUEST_CODE_OPEN_ITEM, null, 0, 0, 0);
-//                        return null;
-//                    }
-//                });
-//        return mOpenItemTaskSource.getTask();
-//    }
-
-    /**
-     * Shows a toast message.
-     */
-//    protected void showMessage(String message) {
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//    }
-
-    /**
-     * Called after the user has signed in and the Drive client has been initialized.
-     */
-    protected abstract void onDriveClientReady();
-
-    protected DriveClient getDriveClient() {
-        return mDriveClient;
-    }
 
     protected DriveResourceClient getDriveResourceClient() {
         return mDriveResourceClient;

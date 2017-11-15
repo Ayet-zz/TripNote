@@ -1,12 +1,9 @@
 package com.tbuonomo.jawgmapsample;
 
-import android.content.Intent;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.android.gms.drive.DriveContents;
@@ -15,9 +12,7 @@ import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.query.Query;
-import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -25,43 +20,34 @@ import com.google.android.gms.tasks.Task;
 
 import com.google.android.gms.drive.query.Filters;
 import com.google.android.gms.drive.query.SearchableField;
-import com.google.android.gms.tasks.Tasks;
-import com.google.firebase.auth.AuthResult;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 /**
  * An activity to illustrate how to query files.
  */
-public class TestActivity extends ConnectionDriveService {
+public class ReadFile extends ConnectionDriveService {
 
-    private static final String TAG = "TestActivity";
+    private static final String TAG = "ReadFile";
 
     private MetadataBuffer metadataBuffer;
     public List<StoryRecyclerView> myDataSet;
 
 
-    public TestActivity(List<StoryRecyclerView> myDataSet){
+    public ReadFile(List<StoryRecyclerView> myDataSet){
         super();
         this.myDataSet=myDataSet;
         listFiles();
     }
 
 
-    @Override
-    protected void onDriveClientReady() {
-        listFiles();
-    }
+    //@Override
+    //protected void onDriveClientReady() {
+    //    listFiles();
+    //}
 
     private void listFiles() {
         Query query = new Query.Builder()

@@ -9,17 +9,17 @@ import java.util.List;
  * Created by lothairelaeuffer on 15/11/2017.
  */
 
-public class TestTask extends AsyncTask<Void, Void, Boolean> {
+public class ReadFileTask extends AsyncTask<Void, Void, Boolean> {
 
 
-    private static final String TAG = "TestTask";
+    private static final String TAG = "ReadFileTask";
 
     private final OnTestListener onTestListener;
 
     private List<StoryRecyclerView> myDataSet;
     //private final ProgressBar progressBar;
 
-    public TestTask(List<StoryRecyclerView> myDataSet, OnTestListener onTestListener) {
+    public ReadFileTask(List<StoryRecyclerView> myDataSet, OnTestListener onTestListener) {
             this.onTestListener=onTestListener;
             this.myDataSet=myDataSet;
     }
@@ -33,8 +33,8 @@ public class TestTask extends AsyncTask<Void, Void, Boolean> {
     protected Boolean doInBackground(Void... params) {
             boolean connection=true;
 
-            TestActivity mTestActivity = new TestActivity(myDataSet);
-            myDataSet = mTestActivity.myDataSet;
+            ReadFile mReadFile = new ReadFile(myDataSet);
+            myDataSet = mReadFile.myDataSet;
 
             try {
             Thread.sleep(2000);
