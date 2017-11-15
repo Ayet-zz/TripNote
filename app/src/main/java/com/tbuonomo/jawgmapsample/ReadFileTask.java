@@ -2,6 +2,8 @@ package com.tbuonomo.jawgmapsample;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -17,16 +19,18 @@ public class ReadFileTask extends AsyncTask<Void, Void, Boolean> {
     private final OnTestListener onTestListener;
 
     private List<StoryRecyclerView> myDataSet;
-    //private final ProgressBar progressBar;
+    private final ProgressBar progressBar;
 
-    public ReadFileTask(List<StoryRecyclerView> myDataSet, OnTestListener onTestListener) {
-            this.onTestListener=onTestListener;
-            this.myDataSet=myDataSet;
+    public ReadFileTask(List<StoryRecyclerView> myDataSet, ProgressBar progressBar, OnTestListener onTestListener) {
+        this.onTestListener=onTestListener;
+        this.myDataSet=myDataSet;
+        this.progressBar=progressBar;
     }
 
     @Override
     protected void onPreExecute() {
-        Log.d(TAG, "preexecute");
+        // Show Progress bar
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -46,13 +50,12 @@ public class ReadFileTask extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean success) {
-            if(success){
-
+        if(success){
             onTestListener.OnSuccess();
-
-            }else {
+        }else {
             onTestListener.OnFailure();
-            }
+        }
+        progressBar.setVisibility(View.GONE);
     }
 
     public interface OnTestListener{

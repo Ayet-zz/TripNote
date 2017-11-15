@@ -153,62 +153,62 @@ public class ConnectionDriveActivity extends Activity {
         startActivity(intent);
     }
 
-    /**
-     * Prompts the user to select a text file using OpenFileActivity.
-     *
-     * @return Task that resolves with the selected item's ID.
-     */
-    protected Task<DriveId> pickTextFile() {
-        OpenFileActivityOptions openOptions =
-                new OpenFileActivityOptions.Builder()
-                        .setSelectionFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
-                        .setActivityTitle(getString(R.string.select_file))
-                        .build();
-        return pickItem(openOptions);
-    }
-
-    /**
-     * Prompts the user to select a folder using OpenFileActivity.
-     *
-     * @return Task that resolves with the selected item's ID.
-     */
-    protected Task<DriveId> pickFolder() {
-        OpenFileActivityOptions openOptions =
-                new OpenFileActivityOptions.Builder()
-                        .setSelectionFilter(
-                                Filters.eq(SearchableField.MIME_TYPE, DriveFolder.MIME_TYPE))
-                        .setActivityTitle(getString(R.string.select_folder))
-                        .build();
-        return pickItem(openOptions);
-    }
-
-    /**
-     * Prompts the user to select a folder using OpenFileActivity.
-     *
-     * @param openOptions Filter that should be applied to the selection
-     * @return Task that resolves with the selected item's ID.
-     */
-    private Task<DriveId> pickItem(OpenFileActivityOptions openOptions) {
-        mOpenItemTaskSource = new TaskCompletionSource<>();
-        getDriveClient()
-                .newOpenFileActivityIntentSender(openOptions)
-                .continueWith(new Continuation<IntentSender, Void>() {
-                    @Override
-                    public Void then(@NonNull Task<IntentSender> task) throws Exception {
-                        startIntentSenderForResult(
-                                task.getResult(), REQUEST_CODE_OPEN_ITEM, null, 0, 0, 0);
-                        return null;
-                    }
-                });
-        return mOpenItemTaskSource.getTask();
-    }
-
-    /**
-     * Shows a toast message.
-     */
-    protected void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
+//    /**
+//     * Prompts the user to select a text file using OpenFileActivity.
+//     *
+//     * @return Task that resolves with the selected item's ID.
+//     */
+//    protected Task<DriveId> pickTextFile() {
+//        OpenFileActivityOptions openOptions =
+//                new OpenFileActivityOptions.Builder()
+//                        .setSelectionFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
+//                        .setActivityTitle(getString(R.string.select_file))
+//                        .build();
+//        return pickItem(openOptions);
+//    }
+//
+//    /**
+//     * Prompts the user to select a folder using OpenFileActivity.
+//     *
+//     * @return Task that resolves with the selected item's ID.
+//     */
+//    protected Task<DriveId> pickFolder() {
+//        OpenFileActivityOptions openOptions =
+//                new OpenFileActivityOptions.Builder()
+//                        .setSelectionFilter(
+//                                Filters.eq(SearchableField.MIME_TYPE, DriveFolder.MIME_TYPE))
+//                        .setActivityTitle(getString(R.string.select_folder))
+//                        .build();
+//        return pickItem(openOptions);
+//    }
+//
+//    /**
+//     * Prompts the user to select a folder using OpenFileActivity.
+//     *
+//     * @param openOptions Filter that should be applied to the selection
+//     * @return Task that resolves with the selected item's ID.
+//     */
+//    private Task<DriveId> pickItem(OpenFileActivityOptions openOptions) {
+//        mOpenItemTaskSource = new TaskCompletionSource<>();
+//        getDriveClient()
+//                .newOpenFileActivityIntentSender(openOptions)
+//                .continueWith(new Continuation<IntentSender, Void>() {
+//                    @Override
+//                    public Void then(@NonNull Task<IntentSender> task) throws Exception {
+//                        startIntentSenderForResult(
+//                                task.getResult(), REQUEST_CODE_OPEN_ITEM, null, 0, 0, 0);
+//                        return null;
+//                    }
+//                });
+//        return mOpenItemTaskSource.getTask();
+//    }
+//
+//    /**
+//     * Shows a toast message.
+//     */
+//    protected void showMessage(String message) {
+//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+//    }
 
     /**
      * Called after the user has signed in and the Drive client has been initialized.
