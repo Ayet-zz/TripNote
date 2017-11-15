@@ -19,6 +19,8 @@ import java.io.InputStream;
  */
 
 public class StoryRecyclerView {
+    private  String latitude;
+    private  String longitude;
     private String title;
     private String description;
     private Bitmap image;
@@ -31,6 +33,13 @@ public class StoryRecyclerView {
     public StoryRecyclerView(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+    public StoryRecyclerView(String title, String description, Bitmap image,String latitude,String longitude) {
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
 
@@ -58,4 +67,19 @@ public class StoryRecyclerView {
         this.image = image;
     }
 
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 }

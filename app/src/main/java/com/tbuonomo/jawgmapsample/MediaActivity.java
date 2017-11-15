@@ -1,5 +1,6 @@
 package com.tbuonomo.jawgmapsample;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.BottomNavigationView;
@@ -38,10 +39,9 @@ public class MediaActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             // specify an adapter
-            List<MediaObjectRecyclerView> myDataSet=new ArrayList<MediaObjectRecyclerView>();
-            myDataSet.add(new MediaObjectRecyclerView(getIntent().getStringExtra("Title"),"https://www.thesun.co.uk/wp-content/uploads/2016/08/nintchdbpict000256190292.jpg?w=960"));
-            myDataSet.add(new MediaObjectRecyclerView(getIntent().getStringExtra("Description")));
-            ItemAdapter adapter = new ItemAdapter(myDataSet);
+            List<StoryRecyclerView> myDataSet=new ArrayList<StoryRecyclerView>();
+            myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description"),(Bitmap) getIntent().getParcelableExtra("BitMap")));
+            StoryAdapter adapter = new StoryAdapter(myDataSet);
             recyclerView.setAdapter(adapter);
             floatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
