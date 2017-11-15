@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.IconCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,8 @@ public class MapFragment extends Fragment {
     private static final int MY_REQUEST_ID = 1;
     private MapView mapView;
     private FloatingActionButton cameraRepositioning;
-    private String mimeType,title,latitude,longitude,id,description;
     private List<MarkerOptions> markerOptionsList=new ArrayList<MarkerOptions>();
+    private List<StoryRecyclerView> myDataSet = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,24 +71,39 @@ public class MapFragment extends Fragment {
         mapView.setStyleUrl("https://tile.jawg.io/jawg-streets.json?access-token=" + BuildConfig.JAWG_API_KEY);
         mapView.onCreate(savedInstanceState);
 
+
+        new ReadFileTask( myDataSet, new ReadFileTask.OnTestListener() {
+            @Override
+            public void OnSuccess() {
+                for (StoryRecyclerView data:myDataSet) {
+                    markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
+                            .title(data.getTitle()));
+                }
+
+            }
+            public void OnFailure(){
+                //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
+            }
+        }).execute();
+
         //Check if we have the permission and create a location manager
         if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
             LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
 
-                //Intent intent = new Intent(getContext(), RetrieveMetadataActivity.class);
-                //startActivityForResult(intent, MY_REQUEST_ID);
-
-                //add listener for the button and location
-
-            final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
+             final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
                 @Override
                 public boolean onMarkerClick(@NonNull Marker marker) {
                     if(!(marker.getTitle().equals("You are here!"))) {
-                        Intent intent = new Intent(getContext(), MediaActivity.class);
-                        intent.putExtra("Title",title);
-                        intent.putExtra("Description",description);
-                        startActivity(intent);
-                        return true;
+                       if(markerOptionsList.contains(marker))
+                       {
+                           Intent intent = new Intent(getContext(), MediaActivity.class);
+                           intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(marker)).getImage());
+                           intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(marker)).getTitle());
+                           intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(marker)).getDescription());
+                           startActivity(intent);
+                           return true;
+                       }
+
                     }
                    return false;
                 }
@@ -99,20 +115,6 @@ public class MapFragment extends Fragment {
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode,Intent data) {
-        if (requestCode == MY_REQUEST_ID) {
-            if (resultCode == Activity.RESULT_OK) {
-                mimeType = data.getStringExtra("MimeType");
-                title = data.getStringExtra("Title");
-                description = data.getStringExtra("Description");
-                latitude = data.getStringExtra("Latitude");
-                longitude = data.getStringExtra("Longitude");
-                id = data.getStringExtra("ID");
-                markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude)))
-                        .title(id));
 
-            }
-        }
-    }
 
 }

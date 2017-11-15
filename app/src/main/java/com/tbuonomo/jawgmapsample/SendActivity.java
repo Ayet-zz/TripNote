@@ -47,6 +47,7 @@ public class SendActivity extends AppCompatActivity {
         resetBtn = (Button) findViewById(R.id.resetBtn);
         mProgressBar = (ProgressBar)findViewById(R.id.send_progress);
         uniqueID = UUID.randomUUID().toString();
+
         mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
         Glide.with(this)
                 .load(mFile)
@@ -62,19 +63,6 @@ public class SendActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                new SendTask(mFile, description.getText().toString(), mProgressBar, new SendTask.OnSendListener() {
-//                    @Override
-//                    public void OnSuccess() {
-//                        Intent intent = new Intent(SendActivity.this, BottomNavActivity.class);
-//                        startActivity(intent);
-//                    }
-//
-//                    public void OnFailure(){
-//                        Toast.makeText(getBaseContext(), R.string.send_fail, Toast.LENGTH_LONG).show();
-//                    }
-//                }).execute();
-
-
                 Intent intent = new Intent(SendActivity.this, CreateFileActivity.class);
                 intent.putExtra("description", description.getText().toString());
                 intent.putExtra("uniqueID",uniqueID);

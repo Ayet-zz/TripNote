@@ -83,6 +83,8 @@ public class ReadFile extends ConnectionDriveService {
                                     else{
                                         description = "";
                                     }
+                                    final String latitude=item.getCustomProperties().get("latitude");
+                                    final String longitude=item.getCustomProperties().get("latitude");
 
                                     //get the picture
                                     DriveId mId = item.getDriveId();
@@ -99,7 +101,7 @@ public class ReadFile extends ConnectionDriveService {
                                                     Bitmap bitmap1 = BitmapFactory.decodeStream(mInputStream);
 
                                                     //add title description image to myDataSet
-                                                    myDataSet.add(new StoryRecyclerView(title, description, bitmap1));
+                                                    myDataSet.add(new StoryRecyclerView(title, description, bitmap1,latitude,longitude));
 
                                                     Task<Void> discardTask = getDriveResourceClient().discardContents(contents);
                                                     return discardTask;

@@ -84,10 +84,8 @@ public class CreateFileActivity extends BaseDemoActivity {
                                 .setMimeType("image/jpeg")
                                 .setTitle("Android Photo " +uniqueID+".jpeg")
                                 .setDescription(description)
-                                .setCustomProperty(new CustomPropertyKey("Latitude", CustomPropertyKey.PUBLIC),latitude)
-                                .setCustomProperty(new CustomPropertyKey("Longitude", CustomPropertyKey.PUBLIC), longitude)
-                                .setCustomProperty(new CustomPropertyKey("ID",CustomPropertyKey.PUBLIC),uniqueID)
-                                //.setCustomProperty(new CustomPropertyKey("1", CustomPropertyKey.PUBLIC), "blabla1")
+                                .setCustomProperty(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC),latitude)
+                                .setCustomProperty(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC), longitude)
                                 .build();
 
                         return getDriveResourceClient().createFile(parent, changeSet, contents);

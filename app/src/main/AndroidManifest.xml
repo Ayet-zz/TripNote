@@ -32,18 +32,11 @@
         </activity>
 
         <activity android:name=".BottomNavActivity" />
-        <activity android:name=".RetrieveMetadataActivity" />
         <activity android:name=".MediaActivity" />
         <activity android:name=".SendActivity" />
 
         <activity android:name=".CreateFileActivity"/>
         <activity android:name=".ConnectionDriveActivity"/>
-
-
-        <activity android:name=".StoriesActivity" >
-
-        </activity>
-
 
 
     </application>
