@@ -1,4 +1,4 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

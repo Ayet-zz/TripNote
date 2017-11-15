@@ -1,26 +1,9 @@
-package com.tbuonomo.jawgmapsample;
-
-/*
- * Copyright 2013 Google Inc. All Rights Reserved.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package com.ayetlaeuffer.tripnote;
 
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -29,13 +12,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveClient;
-import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.DriveResourceClient;
 import com.google.android.gms.drive.OpenFileActivityOptions;
-import com.google.android.gms.drive.query.Filters;
-import com.google.android.gms.drive.query.SearchableField;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 
@@ -153,56 +132,7 @@ public class ConnectionDriveActivity extends Activity {
         startActivity(intent);
     }
 
-//    /**
-//     * Prompts the user to select a text file using OpenFileActivity.
-//     *
-//     * @return Task that resolves with the selected item's ID.
-//     */
-//    protected Task<DriveId> pickTextFile() {
-//        OpenFileActivityOptions openOptions =
-//                new OpenFileActivityOptions.Builder()
-//                        .setSelectionFilter(Filters.eq(SearchableField.MIME_TYPE, "text/plain"))
-//                        .setActivityTitle(getString(R.string.select_file))
-//                        .build();
-//        return pickItem(openOptions);
-//    }
-//
-//    /**
-//     * Prompts the user to select a folder using OpenFileActivity.
-//     *
-//     * @return Task that resolves with the selected item's ID.
-//     */
-//    protected Task<DriveId> pickFolder() {
-//        OpenFileActivityOptions openOptions =
-//                new OpenFileActivityOptions.Builder()
-//                        .setSelectionFilter(
-//                                Filters.eq(SearchableField.MIME_TYPE, DriveFolder.MIME_TYPE))
-//                        .setActivityTitle(getString(R.string.select_folder))
-//                        .build();
-//        return pickItem(openOptions);
-//    }
-//
-//    /**
-//     * Prompts the user to select a folder using OpenFileActivity.
-//     *
-//     * @param openOptions Filter that should be applied to the selection
-//     * @return Task that resolves with the selected item's ID.
-//     */
-//    private Task<DriveId> pickItem(OpenFileActivityOptions openOptions) {
-//        mOpenItemTaskSource = new TaskCompletionSource<>();
-//        getDriveClient()
-//                .newOpenFileActivityIntentSender(openOptions)
-//                .continueWith(new Continuation<IntentSender, Void>() {
-//                    @Override
-//                    public Void then(@NonNull Task<IntentSender> task) throws Exception {
-//                        startIntentSenderForResult(
-//                                task.getResult(), REQUEST_CODE_OPEN_ITEM, null, 0, 0, 0);
-//                        return null;
-//                    }
-//                });
-//        return mOpenItemTaskSource.getTask();
-//    }
-//
+
 //    /**
 //     * Shows a toast message.
 //     */

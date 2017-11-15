@@ -1,18 +1,6 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-
-import com.google.android.gms.drive.DriveContents;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.Metadata;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-
-import java.io.InputStream;
 
 /**
  * Created by lothairelaeuffer on 13/11/2017.

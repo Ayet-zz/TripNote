@@ -1,13 +1,8 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
-import android.content.Intent;
-import android.opengl.EGLDisplay;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 /**
  * Created by aurel on 25/10/2017.

@@ -1,4 +1,4 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 /*
  * Copyright 2014 The Android Open Source Project
@@ -15,10 +15,6 @@ package com.tbuonomo.jawgmapsample;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.TextureView;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,4 +1,4 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 
 import android.graphics.Bitmap;
@@ -39,7 +39,7 @@ public class ReadFile extends ConnectionDriveService {
 
 
     public ReadFile(List<StoryRecyclerView> myDataSet){
-        super();
+        //super();
         this.myDataSet=myDataSet;
         listFiles();
     }

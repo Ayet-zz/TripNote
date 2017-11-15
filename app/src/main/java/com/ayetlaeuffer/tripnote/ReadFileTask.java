@@ -1,8 +1,6 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
 import org.junit.Test;
 

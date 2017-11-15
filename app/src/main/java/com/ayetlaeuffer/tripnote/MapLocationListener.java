@@ -1,17 +1,10 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
-import android.content.Context;
-import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -22,15 +15,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-import java.io.IOException;
-import java.text.BreakIterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
-import static com.tbuonomo.jawgmapsample.R.id.mapView;
-import static java.security.AccessController.getContext;
 
 /**
  * Created by aurel on 25/10/2017.

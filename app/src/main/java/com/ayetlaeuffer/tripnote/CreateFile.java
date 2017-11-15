@@ -1,24 +1,8 @@
-package com.tbuonomo.jawgmapsample;
+package com.ayetlaeuffer.tripnote;
 
-/*
- * Copyright 2013 Google Inc. All Rights Reserved.
- *
- *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- *  http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -38,19 +22,29 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * An activity to illustrate how to create a file.
- */
-public class CreateFileActivity extends BaseDemoActivity {
-    private static final String TAG = "CreateFileActivity";
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
-    @Override
-    protected void onDriveClientReady() {
-        createFile();
+
+/**
+ * Created by lothairelaeuffer on 15/11/2017.
+ */
+
+public class CreateFile extends ConnectionDriveService {
+    private static final String TAG = "FileActivity";
+
+    private String description;
+    private String uniqueID;
+    private String longitude;
+    private String latitude;
+
+    public CreateFile(String description, String uniqueID, String longitude, String latitude){
+        this.description = description;
+        this.uniqueID = uniqueID;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
-    private void createFile() {
-        // [START create_file]
+    public void createFile() {
         final Task<DriveFolder> rootFolderTask = getDriveResourceClient().getRootFolder();
         final Task<DriveContents> createContentsTask = getDriveResourceClient().createContents();
         Tasks.whenAll(rootFolderTask, createContentsTask)
@@ -60,12 +54,12 @@ public class CreateFileActivity extends BaseDemoActivity {
                         DriveFolder parent = rootFolderTask.getResult();
                         DriveContents contents = createContentsTask.getResult();
 
-
                         OutputStream outputStream = contents.getOutputStream();
-                        File mFile = new File(getExternalFilesDir(null), "currentPicture.jpg");
+                        File mFile = new File(getApplicationContext().getExternalFilesDir(null), "currentPicture.jpg");
 
                         //Write the bitmap data
-                        final Bitmap image = BitmapFactory.decodeFile(mFile.getPath());
+                        Bitmap image = BitmapFactory.decodeFile(mFile.getPath());
+                        image = rotateBitmap(image, 90);
                         ByteArrayOutputStream bitmapStream = new ByteArrayOutputStream();
                         image.compress(Bitmap.CompressFormat.JPEG, 10, bitmapStream);
                         try {
@@ -74,11 +68,6 @@ public class CreateFileActivity extends BaseDemoActivity {
                             Log.i(TAG, "Unable to write file contents.");
                         }
 
-                        Intent intent = getIntent();
-                        String description = intent.getStringExtra("description");
-                        String uniqueID= intent.getStringExtra("uniqueID");
-                        String longitude = intent.getStringExtra("longitude");
-                        String latitude=intent.getStringExtra("latitude");
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
@@ -91,25 +80,29 @@ public class CreateFileActivity extends BaseDemoActivity {
                         return getDriveResourceClient().createFile(parent, changeSet, contents);
                     }
                 })
-                .addOnSuccessListener(this,
-                        new OnSuccessListener<DriveFile>() {
+                .addOnSuccessListener(new OnSuccessListener<DriveFile>() {
                             @Override
                             public void onSuccess(DriveFile driveFile) {
-                                showMessage(getString(R.string.file_created,
-                                        driveFile.getDriveId().encodeToString()));
-                                finish();
-                                Intent intent = new Intent(CreateFileActivity.this, BottomNavActivity.class);
-                                startActivity(intent);
+                                Log.d(TAG,"file created");
+                                //showMessage(getString(R.string.file_created,
+                                 //       driveFile.getDriveId().encodeToString()));
+                                //finish();
                             }
                         })
-                .addOnFailureListener(this, new OnFailureListener() {
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.e(TAG, "Unable to create file", e);
-                        showMessage(getString(R.string.file_create_error));
-                        finish();
+                        //showMessage(getString(R.string.file_create_error));
+                        //finish();
                     }
                 });
-        // [END create_file]
+    }
+
+    public static Bitmap rotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }
