@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,8 @@ public class StoriesFragment extends Fragment{
 
 
 
-        new ReadFileTask( myDataSet, new ReadFileTask.OnTestListener() {
+        new ReadFileTask( myDataSet,(ProgressBar)getActivity().findViewById(R.id.progressBar), new ReadFileTask.OnTestListener() {
+
             @Override
             public void OnSuccess() {
 
