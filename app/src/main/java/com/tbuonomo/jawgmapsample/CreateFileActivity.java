@@ -67,7 +67,7 @@ public class CreateFileActivity extends BaseDemoActivity {
                         //Write the bitmap data
                         final Bitmap image = BitmapFactory.decodeFile(mFile.getPath());
                         ByteArrayOutputStream bitmapStream = new ByteArrayOutputStream();
-                        image.compress(Bitmap.CompressFormat.PNG, 100, bitmapStream);
+                        image.compress(Bitmap.CompressFormat.JPEG, 10, bitmapStream);
                         try {
                             outputStream.write(bitmapStream.toByteArray());
                         } catch (IOException e1) {
@@ -82,7 +82,7 @@ public class CreateFileActivity extends BaseDemoActivity {
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
-                                .setTitle("Android Photo " +uniqueID+".png")
+                                .setTitle("Android Photo " +uniqueID+".jpeg")
                                 .setDescription(description)
                                 .setCustomProperty(new CustomPropertyKey("Latitude", CustomPropertyKey.PUBLIC),latitude)
                                 .setCustomProperty(new CustomPropertyKey("Longitude", CustomPropertyKey.PUBLIC), longitude)

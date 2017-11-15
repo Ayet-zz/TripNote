@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 
 
 public class BottomNavActivity extends AppCompatActivity {
+
+    private static final String TAG = "BottomNavActivity";
 
     CameraFragment mCameraFragment;
     MapFragment mMapFragment;

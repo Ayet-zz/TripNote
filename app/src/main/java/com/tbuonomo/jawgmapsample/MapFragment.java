@@ -74,8 +74,8 @@ public class MapFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
             LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
 
-                Intent intent = new Intent(getContext(), RetrieveMetadataActivity.class);
-                startActivityForResult(intent, MY_REQUEST_ID);
+                //Intent intent = new Intent(getContext(), RetrieveMetadataActivity.class);
+                //startActivityForResult(intent, MY_REQUEST_ID);
 
                 //add listener for the button and location
 
