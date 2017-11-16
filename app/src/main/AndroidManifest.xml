@@ -25,7 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar.App"
         android:largeHeap="true">
-        <activity android:name="com.ayetlaeuffer.tripnote.LoginActivity">
+        <activity android:name="com.ayetlaeuffer.tripnote.FirebaseLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -54,5 +54,7 @@
     <string name="file_not_selected">file is not selected</string>
     <string name="read_failed">read failed</string>
     <string name="query_failed">Problem while retrieving files.</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="delete_account">Delete Account</string>
 
 </resources>

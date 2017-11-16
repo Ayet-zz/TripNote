@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.ayetlaeuffer.tripnote"
         minSdkVersion 21
@@ -11,6 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -43,8 +44,6 @@ dependencies {
         transitive = true
     }
 
-
-    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.0.0'
@@ -53,8 +52,16 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.google.android.gms:play-services:11.6.0'
+    compile 'com.firebaseui:firebase-ui-auth:3.1.0'
+
+    // Required only if Facebook login support is required
+    compile('com.facebook.android:facebook-android-sdk:4.27.0')
+
+    // Required only if Twitter login support is required
+    compile("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
     testCompile 'junit:junit:4.12'
 }
 
 
 
+apply plugin: 'com.google.gms.google-services'
