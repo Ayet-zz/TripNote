@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1016559877868",
+    "firebase_url": "https://tripnoteproject.firebaseio.com",
+    "project_id": "tripnoteproject",
+    "storage_bucket": "tripnoteproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016559877868:android:03db4b725514f309",
+        "android_client_info": {
+          "package_name": "com.ayetlaeuffer.tripnote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016559877868-luk985uld3ulkusmub8f4553tjjeasdi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayetlaeuffer.tripnote",
+            "certificate_hash": "c06967ec6d675773f67c6cd95c24cde5a8031403"
+          }
+        },
+        {
+          "client_id": "1016559877868-9o86mgogk9eci2tlh1qbr775j5eaajmk.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1016559877868-mdjq5jbqo5eshodp0lm9fodj2sjq7jdt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ayetlaeuffer.tripnote",
+            "certificate_hash": "741bef1c12d7cb01f718376b61b605dad67aa218"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfhqZxu6ztxeQy9nKbtlPEQSq6DVaQm2I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016559877868-9o86mgogk9eci2tlh1qbr775j5eaajmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

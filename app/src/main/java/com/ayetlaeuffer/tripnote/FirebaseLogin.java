@@ -3,72 +3,113 @@ package com.ayetlaeuffer.tripnote;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.ResultCodes;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CAMERA;
 
-public class LoginActivity extends AppCompatActivity {
+public class FirebaseLogin extends AppCompatActivity {
+        private static final int RC_SIGN_IN = 123;
         private static final int PERMISSION_REQUEST_CODE = 200;
         @Override
         protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_login);
-            Button submitBtn = (Button) findViewById(R.id.submitBtn);
-            Button resetBtn = (Button) findViewById(R.id.resetBtn);
+            int nombreAleatoire = 1 + (int)(Math.random() *3);
+            switch (nombreAleatoire){
+                case 1:
+                    setContentView(R.layout.activity_login);
+                    break;
+                case 2:
+                    setContentView(R.layout.activity_login2);
+                    break;
+                case 3:
+                    setContentView(R.layout.activity_login3);
+                    break;
+            }
 
 
             if(!checkPermission()) {
                 requestPermission();
             }
-            final EditText usernameEdit = (EditText) findViewById(R.id.email);
-            final EditText passwordEdit = (EditText) findViewById(R.id.password);
 
-            submitBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new LoginTask( usernameEdit.getText().toString(),passwordEdit.getText().toString(),(ProgressBar)findViewById(R.id.login_progress),new LoginTask.OnLoginListener() {
-                        @Override
-                        public void OnSuccess() {
-                            Intent intent = new Intent(LoginActivity.this, ConnectionDriveActivity.class);
-                            startActivity(intent);
-                        }
-                        public void OnFailure(){
-                            Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
-                        }
-                    }).execute();
+// Choose authentication providers
+            List<AuthUI.IdpConfig> providers = Arrays.asList(
+                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
 
-                }
-            });
+// Create and launch sign-in intent
+            switch (nombreAleatoire){
+                case 1:
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(providers)
+                                    .setTheme(R.style.BackgroundTheme)
+                                    .build(),
+                            RC_SIGN_IN);
+                    break;
+                case 2:
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(providers)
+                                    .setTheme(R.style.BackgroundTheme2)
+                                    .build(),
+                            RC_SIGN_IN);
+                    break;
+                case 3:
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(providers)
+                                    .setTheme(R.style.BackgroundTheme3)
+                                    .build(),
+                            RC_SIGN_IN);
+                    break;
+            }
 
 
-            resetBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Toast.makeText(getBaseContext(), "Inputs cleared", Toast.LENGTH_LONG).show();
-                    usernameEdit.setText("");
-                    passwordEdit.setText("");
-                }
-
-            });
 
 
 
         }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == ResultCodes.OK) {
+                // Successfully signed in
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                Intent intent = new Intent(FirebaseLogin.this, ConnectionDriveActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
@@ -118,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(LoginActivity.this)
+        new AlertDialog.Builder(FirebaseLogin.this)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", null)

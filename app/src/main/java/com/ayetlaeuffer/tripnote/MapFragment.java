@@ -32,8 +32,8 @@ public class MapFragment extends Fragment {
     private static final int MY_REQUEST_ID = 1;
     private MapView mapView;
     private FloatingActionButton cameraRepositioning;
-    private List<MarkerOptions> markerOptionsList=new ArrayList<MarkerOptions>();
-    private List<StoryRecyclerView> myDataSet = new ArrayList<>();
+    private final List<MarkerOptions> markerOptionsList=new ArrayList<MarkerOptions>();
+    private final List<StoryRecyclerView> myDataSet = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,15 +79,17 @@ public class MapFragment extends Fragment {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
                         if(!(marker.getTitle().equals("You are here!"))) {
-                           if(markerOptionsList.contains(marker))
-                           {
-                               Intent intent = new Intent(getContext(), MediaActivity.class);
-                               intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(marker)).getImage());
-                               intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(marker)).getTitle());
-                               intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(marker)).getDescription());
-                               startActivity(intent);
-                               return true;
-                           }
+                            for (MarkerOptions markerOptions:markerOptionsList)
+                            {
+                                if(markerOptions.getMarker().getPosition().equals(marker.getPosition())){
+                                    Intent intent = new Intent(getContext(), MediaActivity.class);
+                                    //intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
+                                    intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getTitle());
+                                    intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
+                                    startActivity(intent);
+                                    return true;
+                                }
+                            }
 
                         }
                        return false;

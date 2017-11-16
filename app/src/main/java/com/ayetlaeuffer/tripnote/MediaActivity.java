@@ -36,7 +36,7 @@ public class MediaActivity extends AppCompatActivity {
 
             // specify an adapter
             List<StoryRecyclerView> myDataSet=new ArrayList<StoryRecyclerView>();
-            myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description"),(Bitmap) getIntent().getParcelableExtra("bitMap")));
+            myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description")/*,(Bitmap) getIntent().getParcelableExtra("bitMap")*/));
             StoryAdapter adapter = new StoryAdapter(myDataSet);
             recyclerView.setAdapter(adapter);
             floatingActionButton.setOnClickListener(new View.OnClickListener() {

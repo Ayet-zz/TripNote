@@ -19,6 +19,6 @@ import static org.junit.Assert.*;
     // Context of the app under test.
     Context appContext = InstrumentationRegistry.getTargetContext();
 
-    assertEquals("com.tbuonomo.jawgmapsample", appContext.getPackageName());
+    assertEquals("com.ayetlaeuffer.tripnote", appContext.getPackageName());
   }
 }
