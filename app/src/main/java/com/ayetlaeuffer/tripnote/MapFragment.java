@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -54,7 +55,7 @@ public class MapFragment extends Fragment {
         mapView.onCreate(savedInstanceState);
 
         if(myDataSet != null){
-            new ReadFileTask( myDataSet, new ReadFileTask.OnTestListener() {
+            new ReadFileTask( myDataSet, (ProgressBar) view.findViewById(R.id.progressBar), new ReadFileTask.OnTestListener() {
                 @Override
                 public void OnSuccess() {
                     for (StoryRecyclerView data:myDataSet) {

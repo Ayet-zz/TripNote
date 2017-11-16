@@ -19,8 +19,8 @@ import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
  * Created by lothairelaeuffer on 14/11/2017.
  */
 
-public abstract class ConnectionDriveService {
-    private static final String TAG = "BaseDriveActivity";
+public class ConnectionDriveService {
+    private static final String TAG = "ConnectionDriveService";
 
 
     /**
@@ -68,7 +68,7 @@ public abstract class ConnectionDriveService {
      * user's account.
      */
     private void initializeDriveClient(GoogleSignInAccount signInAccount) {
-//        mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
+        mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
         mDriveResourceClient = Drive.getDriveResourceClient(getApplicationContext(), signInAccount);
     }
 

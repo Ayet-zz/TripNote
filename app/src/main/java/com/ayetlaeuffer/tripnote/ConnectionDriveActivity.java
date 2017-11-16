@@ -126,25 +126,16 @@ public class ConnectionDriveActivity extends Activity {
     private void initializeDriveClient(GoogleSignInAccount signInAccount) {
         mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
         mDriveResourceClient = Drive.getDriveResourceClient(getApplicationContext(), signInAccount);
-        //onDriveClientReady();
 
         Intent intent = new Intent(ConnectionDriveActivity.this, BottomNavActivity.class);
         startActivity(intent);
     }
 
 
-//    /**
-//     * Shows a toast message.
-//     */
-//    protected void showMessage(String message) {
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//    }
 
     /**
      * Called after the user has signed in and the Drive client has been initialized.
      */
-    //protected abstract void onDriveClientReady();
-
     protected DriveClient getDriveClient() {
         return mDriveClient;
     }
