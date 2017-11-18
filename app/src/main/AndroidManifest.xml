@@ -23,19 +23,19 @@
         android:label="TripNote"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar.App"
+        android:theme="@style/AppTheme"
         android:largeHeap="true">
-        <activity android:name="com.ayetlaeuffer.tripnote.ConnectionDriveActivity">
+        <activity android:name="com.ayetlaeuffer.tripnote.ConnectionDriveActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ayetlaeuffer.tripnote.BottomNavActivity" />
-        <activity android:name="com.ayetlaeuffer.tripnote.MediaActivity" />
-        <activity android:name="com.ayetlaeuffer.tripnote.SendActivity" />
-        <activity android:name="com.ayetlaeuffer.tripnote.FirebaseLogin"/>
+        <activity android:name="com.ayetlaeuffer.tripnote.BottomNavActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.ayetlaeuffer.tripnote.MediaActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.ayetlaeuffer.tripnote.SendActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.ayetlaeuffer.tripnote.FirebaseLogin" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
