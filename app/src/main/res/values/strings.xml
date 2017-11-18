@@ -45,6 +45,9 @@
     <string name="reset">Reset</string>
 
 
+    <string name="story_send">send story</string>
+    <string name="story_send_fail">Fail to send story</string>
+
 
 
     <string name="file_created">Created file: %1$s.</string>

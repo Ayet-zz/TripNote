@@ -33,7 +33,7 @@ public class MapFragment extends Fragment {
     private MapView mapView;
     private FloatingActionButton cameraRepositioning;
     private final List<MarkerOptions> markerOptionsList=new ArrayList<MarkerOptions>();
-    private final List<StoryRecyclerView> myDataSet = new ArrayList<>();
+    private List<StoryRecyclerView> myDataSet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +55,8 @@ public class MapFragment extends Fragment {
         mapView.onCreate(savedInstanceState);
 
         if(myDataSet != null){
+            myDataSet=new ArrayList<>();
+
             new ReadFileTask( myDataSet, (ProgressBar) view.findViewById(R.id.progressBar), new ReadFileTask.OnTestListener() {
                 @Override
                 public void OnSuccess() {

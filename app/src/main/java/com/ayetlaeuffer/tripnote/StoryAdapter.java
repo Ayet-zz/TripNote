@@ -1,5 +1,6 @@
 package com.ayetlaeuffer.tripnote;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             description.setText(mediaObject.getDescription());
             image.setImageBitmap(mediaObject.getImage());
         }
+        //fill the cells with a parameter
+        public void recycle(){
+            ((BitmapDrawable)image.getDrawable()).getBitmap().recycle();
+        }
     }
 
 
@@ -45,6 +50,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         return new ViewHolder(v);
     }
 
+
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -59,5 +65,13 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return dataset.size();
+    }
+
+
+    //TODO
+    @Override
+    public void onViewRecycled(ViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.recycle();
     }
 }

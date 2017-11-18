@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
+
 /**
  * Created by lothairelaeuffer on 15/11/2017.
  */
@@ -38,6 +40,9 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
 
     private List<StoryRecyclerView> myDataSet;
     private final ProgressBar progressBar;
+
+    private int nbStories;
+    private int nbStoriesMax;
 
     public ReadFileTask(List<StoryRecyclerView> myDataSet, ProgressBar progressBar, OnTestListener onTestListener) {
         this.onTestListener=onTestListener;
@@ -61,12 +66,10 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected void onPostExecute(Integer success) {
-        Log.d(TAG,"onPostExecute");
         if(success == 0) {
-            Log.d(TAG,"return de doInBackground");
+            //return de doInBackground
             //do nothing: the task isn't finished
         }else if (success == 1){
-            Log.d(TAG,"return de onSuccess");
             onTestListener.OnSuccess();
             progressBar.setVisibility(View.GONE);
         }else {
@@ -91,7 +94,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                 .build();
 
         // [START query_files]
-        Task<MetadataBuffer> queryTask = mConnectionDrive.getDriveResourceClient().query(query);
+        final Task<MetadataBuffer> queryTask = mConnectionDrive.getDriveResourceClient().query(query);
         // [END query_files]
 
 
@@ -104,8 +107,24 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                 // Handle results...
                                 // [START_EXCLUDE]
 
+                                nbStories=0;
+                                nbStoriesMax=metadataBuffer.getCount();
+
                                 for (Iterator<Metadata> i = metadataBuffer.iterator(); i.hasNext();) {
+
                                     Metadata item = i.next();
+
+
+
+                                    Log.d(TAG, Boolean.toString(getApplicationContext().getCacheDir().isDirectory()));
+                                    Log.d(TAG, getApplicationContext().getCacheDir().listFiles().toString());
+
+
+                                    if (item.isPinned()){
+                                        Log.d(TAG, "is");
+                                    }else{
+                                        Log.d(TAG,"not");
+                                    }
 
                                     //get the title
                                     final String title = item.getTitle();
@@ -151,7 +170,12 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-                                                    onPostExecute(1);
+                                                    nbStories++;
+                                                    if(nbStories == nbStoriesMax) {
+                                                        onPostExecute(1);
+
+
+                                                    }
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -165,6 +189,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                 }
                                 // [END_EXCLUDE]
                                 metadataBuffer.release();
+
                             }
                         })
                 .addOnFailureListener(new OnFailureListener() {
@@ -178,5 +203,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                 });
         // [END query_results]
     }
+
+
 }
 

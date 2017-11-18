@@ -71,14 +71,18 @@ public class StoriesFragment extends Fragment{
                 recyclerView.setAdapter(adapter);
             }
             public void OnFailure(){
-                //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Fail");
+                Log.e(TAG, "Fail");
             }
         }).execute();
 
     }
 
-
-
-
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        if (myDataSet != null && recyclerView != null) {
+//            recyclerView.setAdapter(adapter);
+//            recyclerView = null;
+//        }
+//    }
 }
