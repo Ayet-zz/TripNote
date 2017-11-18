@@ -7,7 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+
+import com.bumptech.glide.Glide;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -19,14 +22,20 @@ import java.util.List;
 
 public class MediaActivity extends AppCompatActivity {
 
+    private static final String TAG = "MediaActivity";
+
+        private List<StoryRecyclerView> myDataSet;
+        private RecyclerView recyclerView;
+        private StoryAdapter adapter;
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_media);
 
-            RecyclerView recyclerView =(RecyclerView)findViewById(R.id.media_recycler_view) ;
-            FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
+            recyclerView = findViewById(R.id.media_recycler_view) ;
+            FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
 
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
@@ -37,11 +46,11 @@ public class MediaActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             // specify an adapter
-            List<StoryRecyclerView> myDataSet=new ArrayList<StoryRecyclerView>();
+            myDataSet=new ArrayList<StoryRecyclerView>();
             try {
                 Bitmap bitmap = BitmapFactory.decodeStream(getBaseContext().openFileInput("myImage"));
                 myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description"),bitmap));
-                StoryAdapter adapter = new StoryAdapter(myDataSet);
+                adapter = new StoryAdapter(myDataSet, Glide.with(this));
                 recyclerView.setAdapter(adapter);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -56,7 +65,7 @@ public class MediaActivity extends AppCompatActivity {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
-                    FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
+                    FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
                     if ((dy > 0||dy<0) && floatingActionButton.getVisibility() == View.VISIBLE) {
                         floatingActionButton.hide();
                     }
@@ -64,7 +73,7 @@ public class MediaActivity extends AppCompatActivity {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView,newState);
-                    FloatingActionButton floatingActionButton=(FloatingActionButton)findViewById(R.id.floating_action_button);
+                    FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
                     if(newState==0&& floatingActionButton.getVisibility() != View.VISIBLE)
                     {
                         floatingActionButton.show();
@@ -90,6 +99,13 @@ public class MediaActivity extends AppCompatActivity {
 
     @Override public void onStop() {
         super.onStop();
+        //TODO delete the following lines if MediaActivity is ok
+//        Log.e(TAG,"onStop");
+//        if (myDataSet != null && recyclerView != null) {
+//            Log.d(TAG,"inside if");
+//            recyclerView.setAdapter(adapter);
+//            recyclerView = null;
+//        }
     }
 
     @Override public void onLowMemory() {
@@ -107,7 +123,4 @@ public class MediaActivity extends AppCompatActivity {
 
 
 
-    }
-
-
-
+}

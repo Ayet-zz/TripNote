@@ -1,6 +1,5 @@
 package com.ayetlaeuffer.tripnote;
 
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +7,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
+
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
+
+    private static final String TAG = "StoryAdapter";
+
     private List<StoryRecyclerView> dataset;
 
+    private final RequestManager glide;
 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -22,24 +30,24 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
         public ViewHolder(View v) {
             super(v);
-            description=(TextView) v.findViewById(R.id.description);
-            image=(ImageView) v.findViewById(R.id.image);
+            description = v.findViewById(R.id.description);
+            image = v.findViewById(R.id.image);
         }
         //fill the cells with a parameter
-        public void bind(StoryRecyclerView mediaObject){
+        public void bind(StoryRecyclerView mediaObject, RequestManager glide){
             description.setText(mediaObject.getDescription());
-            image.setImageBitmap(mediaObject.getImage());
+            glide.load(mediaObject.getImage())
+                    .apply(new RequestOptions().transforms(new CenterCrop()))
+                    .into(image);
         }
-        //fill the cells with a parameter
-        public void recycle(){
-            ((BitmapDrawable)image.getDrawable()).getBitmap().recycle();
-        }
+
     }
 
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public StoryAdapter(List<StoryRecyclerView> dataset) {
+    public StoryAdapter(List<StoryRecyclerView> dataset, RequestManager glide) {
         this.dataset = dataset;
+        this.glide=glide;
     }
 
     // Create new views (invoked by the layout manager)
@@ -57,8 +65,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         StoryRecyclerView myObject = dataset.get(position);
-        holder.bind(myObject);
-        //holder.textView.setText(dataset.get(position).getText());
+        holder.bind(myObject, glide);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -68,10 +76,4 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     }
 
 
-    //TODO
-    @Override
-    public void onViewRecycled(ViewHolder holder) {
-        super.onViewRecycled(holder);
-        holder.recycle();
-    }
 }

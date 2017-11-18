@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +43,10 @@ public class StoriesFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         progressBar = view.findViewById(R.id.progressBar);
-        recyclerView =(RecyclerView)view.findViewById(R.id.stories_recycler_view) ;
+        recyclerView = view.findViewById(R.id.stories_recycler_view) ;
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
-
-
 
 
         // use a linear layout manager
@@ -61,13 +61,12 @@ public class StoriesFragment extends Fragment{
         myDataSet=new ArrayList<>();
 
 
-
         new ReadFileTask( myDataSet, progressBar, new ReadFileTask.OnTestListener() {
 
             @Override
             public void OnSuccess() {
                 // specify an adapter
-                adapter = new StoryAdapter(myDataSet);
+                adapter = new StoryAdapter(myDataSet, Glide.with(getContext()));
                 recyclerView.setAdapter(adapter);
             }
             public void OnFailure(){
@@ -77,12 +76,4 @@ public class StoriesFragment extends Fragment{
 
     }
 
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        if (myDataSet != null && recyclerView != null) {
-//            recyclerView.setAdapter(adapter);
-//            recyclerView = null;
-//        }
-//    }
 }

@@ -58,53 +58,52 @@ public class MapFragment extends Fragment {
         mapView.setStyleUrl("https://tile.jawg.io/jawg-streets.json?access-token=" + BuildConfig.JAWG_API_KEY);
         mapView.onCreate(savedInstanceState);
 
-        if(myDataSet != null){
-            myDataSet=new ArrayList<>();
 
-            new ReadFileTask( myDataSet, (ProgressBar) view.findViewById(R.id.progressBar), new ReadFileTask.OnTestListener() {
-                @Override
-                public void OnSuccess() {
-                    for (StoryRecyclerView data:myDataSet) {
-                        markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
-                                .title(data.getTitle()));
-                    }
+        myDataSet=new ArrayList<>();
 
+        new ReadFileTask( myDataSet, (ProgressBar) view.findViewById(R.id.progressBar), new ReadFileTask.OnTestListener() {
+            @Override
+            public void OnSuccess() {
+                for (StoryRecyclerView data:myDataSet) {
+                    markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
+                            .title(data.getTitle()));
                 }
-                public void OnFailure(){
-                    //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
-                }
-            }).execute();
-
-
-
-            //Check if we have the permission and create a location manager
-            if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
-                LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
-
-                 final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker) {
-                        if(!(marker.getTitle().equals("You are here!"))) {
-                            for (MarkerOptions markerOptions:markerOptionsList)
-                            {
-                                if(markerOptions.getMarker().getPosition().equals(marker.getPosition())){
-                                    Intent intent = new Intent(getContext(), MediaActivity.class);
-                                    createImageFromBitmap(myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
-                                    intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getTitle());
-                                    intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
-                                    startActivity(intent);
-                                    return true;
-                                }
-                            }
-
-                        }
-                       return false;
-                    }
-                };
-                mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, mLocationListener);
-                cameraRepositioning.setOnClickListener(mLocationListener);
 
             }
+            public void OnFailure(){
+                //Toast.makeText(getBaseContext(), R.string.wrong_password, Toast.LENGTH_LONG).show();
+            }
+        }).execute();
+
+
+
+        //Check if we have the permission and create a location manager
+        if (ContextCompat.checkSelfPermission(getContext(), ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {
+            LocationManager mLocationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
+
+             final MapLocationListener mLocationListener = new MapLocationListener(mapView,markerOptionsList){
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
+                    if(!(marker.getTitle().equals("You are here!"))) {
+                        for (MarkerOptions markerOptions:markerOptionsList)
+                        {
+                            if(markerOptions.getMarker().getPosition().equals(marker.getPosition())){
+                                Intent intent = new Intent(getContext(), MediaActivity.class);
+                                createImageFromBitmap(myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
+                                intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getTitle());
+                                intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
+                                startActivity(intent);
+                                return true;
+                            }
+                        }
+
+                    }
+                   return false;
+                }
+            };
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 5, mLocationListener);
+            cameraRepositioning.setOnClickListener(mLocationListener);
+
         }
 
     }

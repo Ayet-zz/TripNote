@@ -26,7 +26,6 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
 /**
  * Created by lothairelaeuffer on 15/11/2017.
@@ -58,7 +57,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
 
     @Override
     protected Integer doInBackground(Void... params) {
-
+        Log.e(TAG,"doInBackground");
         listFiles();
 
         return 0;
@@ -67,12 +66,15 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer success) {
         if(success == 0) {
+            Log.e(TAG,"onPostExecute0");
             //return de doInBackground
             //do nothing: the task isn't finished
         }else if (success == 1){
+            Log.e(TAG,"onPostExecute1");
             onTestListener.OnSuccess();
             progressBar.setVisibility(View.GONE);
         }else {
+            Log.e(TAG,"onPostExecuteelse");
             onTestListener.OnFailure();
         }
 
@@ -114,18 +116,6 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
 
                                     Metadata item = i.next();
 
-
-
-                                    Log.d(TAG, Boolean.toString(getApplicationContext().getCacheDir().isDirectory()));
-                                    Log.d(TAG, getApplicationContext().getCacheDir().listFiles().toString());
-
-
-                                    if (item.isPinned()){
-                                        Log.d(TAG, "is");
-                                    }else{
-                                        Log.d(TAG,"not");
-                                    }
-
                                     //get the title
                                     final String title = item.getTitle();
 
@@ -155,7 +145,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                                     // Process contents...
 
                                                     BitmapFactory.Options options = new BitmapFactory.Options();
-                                                    options.inSampleSize = 2;
+                                                    options.inSampleSize = 4;
 
                                                     InputStream mInputStream = contents.getInputStream();
                                                     Bitmap bitmap1 = BitmapFactory.decodeStream(mInputStream, null, options);
@@ -173,8 +163,6 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                                     nbStories++;
                                                     if(nbStories == nbStoriesMax) {
                                                         onPostExecute(1);
-
-
                                                     }
                                                 }
                                             })
