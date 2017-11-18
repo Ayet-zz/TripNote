@@ -34,59 +34,31 @@ public class FirebaseLogin extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
-            int nombreAleatoire = 1 + (int)(Math.random() *3);
-            switch (nombreAleatoire){
-                case 1:
-                    setContentView(R.layout.activity_login);
-                    break;
-                case 2:
-                    setContentView(R.layout.activity_login2);
-                    break;
-                case 3:
-                    setContentView(R.layout.activity_login3);
-                    break;
-            }
+            setTheme(R.style.FullscreenTheme);
+            setContentView(R.layout.activity_loading);
 
 
             if(!checkPermission()) {
                 requestPermission();
             }
-
-// Choose authentication providers
-            List<AuthUI.IdpConfig> providers = Arrays.asList(
-                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                    new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
-
-// Create and launch sign-in intent
-            switch (nombreAleatoire){
-                case 1:
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(providers)
-                                    .setTheme(R.style.BackgroundTheme)
-                                    .build(),
-                            RC_SIGN_IN);
-                    break;
-                case 2:
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(providers)
-                                    .setTheme(R.style.BackgroundTheme2)
-                                    .build(),
-                            RC_SIGN_IN);
-                    break;
-                case 3:
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setAvailableProviders(providers)
-                                    .setTheme(R.style.BackgroundTheme3)
-                                    .build(),
-                            RC_SIGN_IN);
-                    break;
+            else
+            {
+                // Choose authentication providers
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
+                // Create and launch sign-in intent
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .setTheme(R.style.LoginTheme)
+                                .build(),
+                        RC_SIGN_IN);
             }
+
+
+
 
 
 
@@ -103,8 +75,9 @@ public class FirebaseLogin extends AppCompatActivity {
             if (resultCode == ResultCodes.OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Intent intent = new Intent(FirebaseLogin.this, ConnectionDriveActivity.class);
+                Intent intent = new Intent(FirebaseLogin.this, BottomNavActivity.class);
                 startActivity(intent);
+                this.overridePendingTransition(0, 0);
             } else {
                 Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
             }
@@ -150,6 +123,22 @@ public class FirebaseLogin extends AppCompatActivity {
                                 return;
                             }
                         }
+
+                    }
+                    if(locationAccepted&&cameraAccepted)
+                    {
+                        // Choose authentication providers
+                        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
+                                new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
+                        // Create and launch sign-in intent
+                        startActivityForResult(
+                                AuthUI.getInstance()
+                                        .createSignInIntentBuilder()
+                                        .setAvailableProviders(providers)
+                                        .setTheme(R.style.LoginTheme)
+                                        .build(),
+                                RC_SIGN_IN);
 
                     }
                 }

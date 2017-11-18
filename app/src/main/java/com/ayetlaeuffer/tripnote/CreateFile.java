@@ -71,7 +71,7 @@ public class CreateFile extends ConnectionDriveService {
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
-                                .setTitle("Android Photo " +uniqueID+".jpeg")
+                                .setTitle(uniqueID+"'s story")
                                 .setDescription(description)
                                 .setCustomProperty(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC),latitude)
                                 .setCustomProperty(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC), longitude)

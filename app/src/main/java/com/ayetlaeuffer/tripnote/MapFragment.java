@@ -1,7 +1,9 @@
 package com.ayetlaeuffer.tripnote;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +21,8 @@ import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,7 +86,7 @@ public class MapFragment extends Fragment {
                             {
                                 if(markerOptions.getMarker().getPosition().equals(marker.getPosition())){
                                     Intent intent = new Intent(getContext(), MediaActivity.class);
-                                    //intent.putExtra("bitMap",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
+                                    createImageFromBitmap(myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
                                     intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getTitle());
                                     intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
                                     startActivity(intent);
@@ -100,6 +104,21 @@ public class MapFragment extends Fragment {
             }
         }
 
+    }
+    public String createImageFromBitmap(Bitmap bitmap) {
+        String fileName = "myImage";//no .png or .jpg needed
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            FileOutputStream fo = getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+            fo.write(bytes.toByteArray());
+            // remember close file output
+            fo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileName = null;
+        }
+        return fileName;
     }
 
 
