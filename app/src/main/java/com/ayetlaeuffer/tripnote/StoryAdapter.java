@@ -16,19 +16,16 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     // Provide a reference to the views for each data item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //Item and view corresponding to one item
-        public TextView title;
         private ImageView image;
         private TextView description;
 
         public ViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.title);
             description=(TextView) v.findViewById(R.id.description);
             image=(ImageView) v.findViewById(R.id.image);
         }
         //fill the cells with a parameter
         public void bind(StoryRecyclerView mediaObject){
-            title.setText(mediaObject.getTitle());
             description.setText(mediaObject.getDescription());
             image.setImageBitmap(mediaObject.getImage());
         }

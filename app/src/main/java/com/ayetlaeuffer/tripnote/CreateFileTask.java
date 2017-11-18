@@ -47,7 +47,7 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
         mCreateFile.createFile();
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
