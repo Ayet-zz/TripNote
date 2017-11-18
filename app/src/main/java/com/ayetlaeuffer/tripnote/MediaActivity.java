@@ -1,6 +1,7 @@
 package com.ayetlaeuffer.tripnote;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,9 +38,14 @@ public class MediaActivity extends AppCompatActivity {
 
             // specify an adapter
             List<StoryRecyclerView> myDataSet=new ArrayList<StoryRecyclerView>();
-            myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description")/*,(Bitmap) getIntent().getParcelableExtra("bitMap")*/));
-            StoryAdapter adapter = new StoryAdapter(myDataSet);
-            recyclerView.setAdapter(adapter);
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(getBaseContext().openFileInput("myImage"));
+                myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("title"),getIntent().getStringExtra("description"),bitmap));
+                StoryAdapter adapter = new StoryAdapter(myDataSet);
+                recyclerView.setAdapter(adapter);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             floatingActionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

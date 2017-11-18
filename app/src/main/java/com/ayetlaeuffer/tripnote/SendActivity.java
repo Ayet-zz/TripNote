@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 import java.util.UUID;
@@ -40,12 +42,14 @@ public class SendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         img = (ImageView)findViewById(R.id.image);
         description = (EditText)findViewById(R.id.description);
         sendBtn = (Button)findViewById(R.id.sendBtn);
         resetBtn = (Button) findViewById(R.id.resetBtn);
         mProgressBar = (ProgressBar)findViewById(R.id.send_progress);
-        uniqueID = UUID.randomUUID().toString();
+        uniqueID = user.getDisplayName();
 
         mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
         Glide.with(this)

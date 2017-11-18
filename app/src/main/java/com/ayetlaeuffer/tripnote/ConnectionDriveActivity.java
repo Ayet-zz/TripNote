@@ -56,6 +56,7 @@ public class ConnectionDriveActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        setContentView(R.layout.activity_connection);
         signIn();
     }
 
@@ -127,8 +128,9 @@ public class ConnectionDriveActivity extends Activity {
         mDriveClient = Drive.getDriveClient(getApplicationContext(), signInAccount);
         mDriveResourceClient = Drive.getDriveResourceClient(getApplicationContext(), signInAccount);
 
-        Intent intent = new Intent(ConnectionDriveActivity.this, BottomNavActivity.class);
+        Intent intent = new Intent(ConnectionDriveActivity.this, FirebaseLogin.class);
         startActivity(intent);
+        this.overridePendingTransition(0, 0);
     }
 
 

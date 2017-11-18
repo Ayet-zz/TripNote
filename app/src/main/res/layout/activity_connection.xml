@@ -2,12 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+    android:background="@color/Blue"
     tools:context="com.ayetlaeuffer.tripnote.FirebaseLogin">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/roadtrip2" />
+
 </RelativeLayout>
