@@ -66,7 +66,7 @@ public class MapFragment extends Fragment {
             public void OnSuccess() {
                 for (StoryRecyclerView data:myDataSet) {
                     markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
-                            .title(data.getTitle()));
+                            .title(data.getAuthor()));
                 }
 
             }
@@ -90,7 +90,7 @@ public class MapFragment extends Fragment {
                             if(markerOptions.getMarker().getPosition().equals(marker.getPosition())){
                                 Intent intent = new Intent(getContext(), MediaActivity.class);
                                 createImageFromBitmap(myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
-                                intent.putExtra("title",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getTitle());
+                                intent.putExtra("author",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getAuthor());
                                 intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
                                 startActivity(intent);
                                 return true;

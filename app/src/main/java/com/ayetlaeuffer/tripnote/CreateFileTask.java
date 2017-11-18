@@ -38,7 +38,7 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
     private static final String TAG = "CreateFileTask";
 
     private String description;
-    private String uniqueID;
+    private String author;
     private String longitude;
     private String latitude;
     private ProgressBar progressBar;
@@ -46,11 +46,11 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
     private final OnCreateFileListener onCreateFileListener;
 
 
-    public CreateFileTask(String description, String uniqueID, String longitude, String latitude, ProgressBar progressBar, OnCreateFileListener onCreateFileListener) {
+    public CreateFileTask(String description, String author, String longitude, String latitude, ProgressBar progressBar, OnCreateFileListener onCreateFileListener) {
         //super();
         this.onCreateFileListener=onCreateFileListener;
         this.description = description;
-        this.uniqueID = uniqueID;
+        this.author = author;
         this.longitude = longitude;
         this.latitude = latitude;
         this.progressBar=progressBar;
@@ -119,10 +119,11 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
-                                .setTitle(uniqueID+"'s story")
+                                .setTitle(author+"'s story")
                                 .setDescription(description)
                                 .setCustomProperty(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC),latitude)
                                 .setCustomProperty(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC), longitude)
+                                .setCustomProperty(new CustomPropertyKey("author", CustomPropertyKey.PUBLIC), author)
                                 .build();
 
                         return mConnectionDrive.getDriveResourceClient().createFile(parent, changeSet, contents);

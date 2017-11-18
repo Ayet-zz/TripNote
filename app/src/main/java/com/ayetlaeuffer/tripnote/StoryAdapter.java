@@ -26,16 +26,19 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         //Item and view corresponding to one item
         private ImageView image;
+        private TextView author;
         private TextView description;
 
         public ViewHolder(View v) {
             super(v);
             description = v.findViewById(R.id.description);
+            author = v.findViewById(R.id.author);
             image = v.findViewById(R.id.image);
         }
         //fill the cells with a parameter
         public void bind(StoryRecyclerView mediaObject, RequestManager glide){
             description.setText(mediaObject.getDescription());
+            author.setText(mediaObject.getAuthor());
             glide.load(mediaObject.getImage())
                     .apply(new RequestOptions().transforms(new CenterCrop()))
                     .into(image);

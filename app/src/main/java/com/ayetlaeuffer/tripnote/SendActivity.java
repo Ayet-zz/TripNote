@@ -31,7 +31,7 @@ public class SendActivity extends AppCompatActivity {
     private Button resetBtn;
     private ImageView img;
     private EditText description;
-    private String uniqueID;
+    private String author;
     private File mFile;
     private double longitude,latitude;
 
@@ -49,7 +49,7 @@ public class SendActivity extends AppCompatActivity {
         sendBtn = findViewById(R.id.sendBtn);
         resetBtn = findViewById(R.id.resetBtn);
         mProgressBar = findViewById(R.id.send_progress);
-        uniqueID = user.getDisplayName();
+        author = user.getDisplayName();
 
         mFile = new File (getExternalFilesDir(null), "currentPicture.jpg");
         Glide.with(this)
@@ -66,7 +66,7 @@ public class SendActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CreateFileTask( description.getText().toString(), uniqueID, String.valueOf(longitude), String.valueOf(latitude),mProgressBar, new CreateFileTask.OnCreateFileListener() {
+                new CreateFileTask( description.getText().toString(), author, String.valueOf(longitude), String.valueOf(latitude),mProgressBar, new CreateFileTask.OnCreateFileListener() {
 
                     @Override
                     public void OnSuccess() {

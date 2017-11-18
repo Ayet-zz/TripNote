@@ -8,7 +8,13 @@
 
 
     <TextView
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"/>
+    <TextView
         android:id="@+id/description"
+        android:layout_below="@+id/author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"/>

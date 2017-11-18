@@ -7,23 +7,20 @@ import android.graphics.Bitmap;
  */
 
 public class StoryRecyclerView {
-    private  String latitude;
-    private  String longitude;
-    private String title;
+    private String latitude;
+    private String longitude;
+    private String author;
     private String description;
     private Bitmap image;
 
-    public StoryRecyclerView(String title, String description, Bitmap image) {
-        this.title = title;
+    public StoryRecyclerView(String author, String description, Bitmap image) {
+        this.author = author;
         this.description = description;
         this.image = image;
     }
-    public StoryRecyclerView(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-    public StoryRecyclerView(String title, String description, Bitmap image,String latitude,String longitude) {
-        this.title = title;
+
+    public StoryRecyclerView(String author, String description, Bitmap image,String latitude,String longitude) {
+        this.author = author;
         this.description = description;
         this.image = image;
         this.latitude=latitude;
@@ -39,12 +36,12 @@ public class StoryRecyclerView {
         this.description = description;
     }
 
-    public String getTitle() {
-        return title;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public Bitmap getImage() {
