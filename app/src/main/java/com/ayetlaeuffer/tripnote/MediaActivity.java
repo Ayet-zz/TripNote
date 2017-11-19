@@ -49,7 +49,7 @@ public class MediaActivity extends AppCompatActivity {
             myDataSet=new ArrayList<StoryRecyclerView>();
             try {
                 Bitmap bitmap = BitmapFactory.decodeStream(getBaseContext().openFileInput("myImage"));
-                myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("author"),getIntent().getStringExtra("description"),bitmap));
+                myDataSet.add(new StoryRecyclerView(getIntent().getStringExtra("author"),getIntent().getStringExtra("date"),getIntent().getStringExtra("description"),bitmap));
                 adapter = new StoryAdapter(myDataSet, Glide.with(this));
                 recyclerView.setAdapter(adapter);
             } catch (FileNotFoundException e) {

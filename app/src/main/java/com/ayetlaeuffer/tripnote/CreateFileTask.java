@@ -25,6 +25,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
 
@@ -42,11 +45,11 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
     private String longitude;
     private String latitude;
     private ProgressBar progressBar;
-
+    private String date;
     private final OnCreateFileListener onCreateFileListener;
 
 
-    public CreateFileTask(String description, String author, String longitude, String latitude, ProgressBar progressBar, OnCreateFileListener onCreateFileListener) {
+    public CreateFileTask(String description, String author, String longitude, String latitude, ProgressBar progressBar,String date, OnCreateFileListener onCreateFileListener) {
         //super();
         this.onCreateFileListener=onCreateFileListener;
         this.description = description;
@@ -54,6 +57,7 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
         this.longitude = longitude;
         this.latitude = latitude;
         this.progressBar=progressBar;
+        this.date=date;
     }
 
 
@@ -116,7 +120,6 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
                             Log.i(TAG, "Unable to write file contents.");
                         }
 
-
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
                                 .setTitle(author+"'s story")
@@ -124,6 +127,7 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
                                 .setCustomProperty(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC),latitude)
                                 .setCustomProperty(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC), longitude)
                                 .setCustomProperty(new CustomPropertyKey("author", CustomPropertyKey.PUBLIC), author)
+                                .setCustomProperty(new CustomPropertyKey("date",CustomPropertyKey.PUBLIC),date)
                                 .build();
 
                         return mConnectionDrive.getDriveResourceClient().createFile(parent, changeSet, contents);

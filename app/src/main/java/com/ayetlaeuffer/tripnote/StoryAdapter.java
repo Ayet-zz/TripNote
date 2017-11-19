@@ -28,17 +28,20 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         private ImageView image;
         private TextView author;
         private TextView description;
+        private TextView date;
 
         public ViewHolder(View v) {
             super(v);
             description = v.findViewById(R.id.description);
             author = v.findViewById(R.id.author);
+            date=v.findViewById(R.id.date);
             image = v.findViewById(R.id.image);
         }
         //fill the cells with a parameter
         public void bind(StoryRecyclerView mediaObject, RequestManager glide){
             description.setText(mediaObject.getDescription());
             author.setText(mediaObject.getAuthor());
+            date.setText(mediaObject.getDate());
             glide.load(mediaObject.getImage())
                     .apply(new RequestOptions().transforms(new CenterCrop()))
                     .into(image);

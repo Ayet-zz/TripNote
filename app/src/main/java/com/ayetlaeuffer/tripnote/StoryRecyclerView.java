@@ -12,19 +12,22 @@ public class StoryRecyclerView {
     private String author;
     private String description;
     private Bitmap image;
+    private String date;
 
-    public StoryRecyclerView(String author, String description, Bitmap image) {
+    public StoryRecyclerView(String author, String date,String description, Bitmap image) {
         this.author = author;
         this.description = description;
         this.image = image;
+        this.date=date;
     }
 
-    public StoryRecyclerView(String author, String description, Bitmap image,String latitude,String longitude) {
+    public StoryRecyclerView(String author,String date, String description, Bitmap image,String latitude,String longitude) {
         this.author = author;
         this.description = description;
         this.image = image;
         this.latitude=latitude;
         this.longitude=longitude;
+        this.date=date;
     }
 
 
@@ -40,9 +43,10 @@ public class StoryRecyclerView {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public String getDate() {
+        return date;
     }
+
 
     public Bitmap getImage() {
         return image;

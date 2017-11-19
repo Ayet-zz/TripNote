@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -34,6 +37,7 @@ public class SendActivity extends AppCompatActivity {
     private String author;
     private File mFile;
     private double longitude,latitude;
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     private ProgressBar mProgressBar;
 
@@ -66,7 +70,7 @@ public class SendActivity extends AppCompatActivity {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CreateFileTask( description.getText().toString(), author, String.valueOf(longitude), String.valueOf(latitude),mProgressBar, new CreateFileTask.OnCreateFileListener() {
+                new CreateFileTask( description.getText().toString(), author, String.valueOf(longitude), String.valueOf(latitude),mProgressBar,dateFormat.format(new Date()), new CreateFileTask.OnCreateFileListener() {
 
                     @Override
                     public void OnSuccess() {

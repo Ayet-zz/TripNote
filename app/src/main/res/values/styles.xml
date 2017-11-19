@@ -16,7 +16,7 @@
     
     <style name="Theme.AppLib.ActionBar.TitleTextStyle" parent="">
         <item name="android:fontFamily">@font/pacifico</item>
-        <item name="android:textColor">@color/Blue</item>
+        <item name="android:textColor">@color/White</item>
         <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -47,11 +47,12 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="colorControlNormal">@android:color/black</item>
-        <item name="colorControlActivated">@color/Blue</item>
+        <item name="colorControlActivated">@color/White</item>
         <item name="colorControlHighlight">@android:color/black</item>
-        <item name="android:textColor">@color/Blue</item>
-        <item name="android:textColorPrimary">@color/Blue</item>
+        <item name="android:textColor">@color/White</item>
+        <item name="android:textColorPrimary">@color/White</item>
         <item name="android:textColorSecondary">@android:color/black</item>
+        <item name="android:colorBackgroundFloating">@color/colorAccent</item>
         <item name="android:windowBackground">@drawable/roadtrip</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

@@ -127,6 +127,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                     final String latitude=item.getCustomProperties().get(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC));
                                     final String longitude=item.getCustomProperties().get(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC));
                                     final String author=item.getCustomProperties().get(new CustomPropertyKey("author", CustomPropertyKey.PUBLIC));
+                                    final String date=item.getCustomProperties().get(new CustomPropertyKey("date",CustomPropertyKey.PUBLIC));
 
                                     //get the picture
                                     DriveId mId = item.getDriveId();
@@ -149,7 +150,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                                     Bitmap bitmap1 = BitmapFactory.decodeStream(mInputStream, null, options);
 
                                                     //add title description image to myDataSet
-                                                    myDataSet.add(new StoryRecyclerView(author, description, bitmap1,latitude,longitude));
+                                                    myDataSet.add(new StoryRecyclerView(author,date, description, bitmap1,latitude,longitude));
 
                                                     Task<Void> discardTask = mConnectionDrive.getDriveResourceClient().discardContents(contents);
                                                     return discardTask;

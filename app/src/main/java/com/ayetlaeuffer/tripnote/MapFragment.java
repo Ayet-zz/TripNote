@@ -36,7 +36,7 @@ public class MapFragment extends Fragment {
     private static final int MY_REQUEST_ID = 1;
     private MapView mapView;
     private FloatingActionButton cameraRepositioning;
-    private final List<MarkerOptions> markerOptionsList=new ArrayList<MarkerOptions>();
+    private List<MarkerOptions> markerOptionsList;
     private List<StoryRecyclerView> myDataSet;
 
     @Override
@@ -49,7 +49,7 @@ public class MapFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        markerOptionsList=new ArrayList<MarkerOptions>();
         Mapbox.getInstance(getContext(), BuildConfig.MAP_BOX_TOKEN);
         //get the variable from the frameLayout
         mapView = view.findViewById(R.id.mapView);
@@ -91,6 +91,7 @@ public class MapFragment extends Fragment {
                                 Intent intent = new Intent(getContext(), MediaActivity.class);
                                 createImageFromBitmap(myDataSet.get(markerOptionsList.indexOf(markerOptions)).getImage());
                                 intent.putExtra("author",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getAuthor());
+                                intent.putExtra("date",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDate());
                                 intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
                                 startActivity(intent);
                                 return true;
