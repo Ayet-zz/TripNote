@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.mapbox.mapboxsdk.Mapbox.getApplicationContext;
+import static java.util.UUID.randomUUID;
 
 
 /**
@@ -122,12 +123,15 @@ public class CreateFileTask extends AsyncTask<Void, Void, Boolean> {
 
                         MetadataChangeSet changeSet = new MetadataChangeSet.Builder()
                                 .setMimeType("image/jpeg")
-                                .setTitle(author+"'s story")
+                                .setTitle(author +" "+ randomUUID().toString())
                                 .setDescription(description)
                                 .setCustomProperty(new CustomPropertyKey("latitude", CustomPropertyKey.PUBLIC),latitude)
                                 .setCustomProperty(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC), longitude)
                                 .setCustomProperty(new CustomPropertyKey("author", CustomPropertyKey.PUBLIC), author)
                                 .setCustomProperty(new CustomPropertyKey("date",CustomPropertyKey.PUBLIC),date)
+                                .setCustomProperty(new CustomPropertyKey("comment",CustomPropertyKey.PUBLIC),"")
+                                .setCustomProperty(new CustomPropertyKey("authorComment",CustomPropertyKey.PUBLIC),"")
+                                .setCustomProperty(new CustomPropertyKey("dateComment",CustomPropertyKey.PUBLIC),"")
                                 .build();
 
                         return mConnectionDrive.getDriveResourceClient().createFile(parent, changeSet, contents);

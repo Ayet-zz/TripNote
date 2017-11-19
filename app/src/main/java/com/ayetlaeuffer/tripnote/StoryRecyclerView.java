@@ -13,23 +13,50 @@ public class StoryRecyclerView {
     private String description;
     private Bitmap image;
     private String date;
+    private String title;
+    private String comment;
+    private String authorComment;
+    private String dateComment;
 
-    public StoryRecyclerView(String author, String date,String description, Bitmap image) {
+    public StoryRecyclerView(String author, String date,String description, Bitmap image,String title,String comment,String authorComment,String dateComment) {
         this.author = author;
         this.description = description;
         this.image = image;
         this.date=date;
+        this.title=title;
+        this.comment=comment;
+        this.authorComment=authorComment;
+        this.dateComment=dateComment;
     }
 
-    public StoryRecyclerView(String author,String date, String description, Bitmap image,String latitude,String longitude) {
+    public StoryRecyclerView(String author,String date, String description, Bitmap image,String latitude,String longitude,String title,String comment,String authorComment,String dateComment) {
         this.author = author;
         this.description = description;
         this.image = image;
         this.latitude=latitude;
         this.longitude=longitude;
         this.date=date;
+        this.title=title;
+        this.comment=comment;
+        this.authorComment=authorComment;
+        this.dateComment=dateComment;
     }
 
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+    public String getAuthorComment() {
+        return authorComment;
+    }
+
+    public String getDateComment() {
+        return dateComment;
+    }
 
     public String getDescription() {
         return description;

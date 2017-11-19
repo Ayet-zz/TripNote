@@ -66,7 +66,7 @@ public class MapFragment extends Fragment {
             public void OnSuccess() {
                 for (StoryRecyclerView data:myDataSet) {
                     markerOptionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(data.getLatitude()),Double.parseDouble(data.getLongitude())))
-                            .title(data.getAuthor()));
+                            .title(data.getTitle()));
                 }
 
             }
@@ -93,6 +93,7 @@ public class MapFragment extends Fragment {
                                 intent.putExtra("author",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getAuthor());
                                 intent.putExtra("date",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDate());
                                 intent.putExtra("description",myDataSet.get(markerOptionsList.indexOf(markerOptions)).getDescription());
+                                intent.putExtra("title",marker.getTitle());
                                 startActivity(intent);
                                 return true;
                             }

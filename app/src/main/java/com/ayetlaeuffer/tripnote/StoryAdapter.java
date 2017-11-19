@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.RequestManager;
@@ -29,13 +30,23 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         private TextView author;
         private TextView description;
         private TextView date;
+        private TextView comment;
+        private TextView authorComment;
+        private TextView dateComment;
+        private LinearLayout linearLayout;
+        private TextView commentString;
 
         public ViewHolder(View v) {
             super(v);
             description = v.findViewById(R.id.description);
             author = v.findViewById(R.id.author);
             date=v.findViewById(R.id.date);
+            comment=v.findViewById(R.id.commentText);
+            authorComment=v.findViewById(R.id.authorComment);
+            dateComment=v.findViewById(R.id.dateComment);
             image = v.findViewById(R.id.image);
+            commentString=v.findViewById(R.id.commentString);
+            linearLayout=v.findViewById(R.id.linearLayout);
         }
         //fill the cells with a parameter
         public void bind(StoryRecyclerView mediaObject, RequestManager glide){
@@ -45,6 +56,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             glide.load(mediaObject.getImage())
                     .apply(new RequestOptions().transforms(new CenterCrop()))
                     .into(image);
+            comment.setText(mediaObject.getComment());
+            authorComment.setText(mediaObject.getAuthorComment());
+            dateComment.setText(mediaObject.getDateComment());
+            if(!(comment==null||comment.getText().equals(""))){
+                linearLayout.setVisibility(View.VISIBLE);
+                commentString.setVisibility(View.VISIBLE);
+            }
+
         }
 
     }

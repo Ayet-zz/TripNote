@@ -128,7 +128,9 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                     final String longitude=item.getCustomProperties().get(new CustomPropertyKey("longitude", CustomPropertyKey.PUBLIC));
                                     final String author=item.getCustomProperties().get(new CustomPropertyKey("author", CustomPropertyKey.PUBLIC));
                                     final String date=item.getCustomProperties().get(new CustomPropertyKey("date",CustomPropertyKey.PUBLIC));
-
+                                    final String comment=item.getCustomProperties().get(new CustomPropertyKey("comment",CustomPropertyKey.PUBLIC));
+                                    final String authorComment=item.getCustomProperties().get(new CustomPropertyKey("authorComment",CustomPropertyKey.PUBLIC));
+                                    final String dateComment=item.getCustomProperties().get(new CustomPropertyKey("dateComment",CustomPropertyKey.PUBLIC));
                                     //get the picture
                                     DriveId mId = item.getDriveId();
                                     DriveFile file = mId.asDriveFile ();
@@ -150,7 +152,7 @@ public class ReadFileTask extends AsyncTask<Void, Void, Integer> {
                                                     Bitmap bitmap1 = BitmapFactory.decodeStream(mInputStream, null, options);
 
                                                     //add title description image to myDataSet
-                                                    myDataSet.add(new StoryRecyclerView(author,date, description, bitmap1,latitude,longitude));
+                                                    myDataSet.add(new StoryRecyclerView(author,date, description, bitmap1,latitude,longitude, title, comment,authorComment,dateComment));
 
                                                     Task<Void> discardTask = mConnectionDrive.getDriveResourceClient().discardContents(contents);
                                                     return discardTask;

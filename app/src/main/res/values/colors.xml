@@ -6,8 +6,8 @@
     <color name="DarkPink">#bc497b</color>
     <color name="White">#ffffffff</color>
     <color name="Blue">	#32b4ff</color>
-    <color name="LightBlue">#3B5998</color>
+    <color name="LightBlue">#dfe3ee</color>
     <color name="Black">#ff000000</color>
-    <color name="black_overlay">#878787</color>
+    <color name="black_overlay">#666666</color>
     <color name="Grey">#66000000</color>
 </resources>
